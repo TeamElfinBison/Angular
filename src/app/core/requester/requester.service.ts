@@ -19,4 +19,10 @@ export class RequesterService {
             .post('http://localhost:1234/api/register', user)
             .map(res => res.json());
     }
+
+    loginUser(user: User) {
+        return this.http
+            .post('http://localhost:1234/api/login', user)
+            .map(res => res.json());
+    }
 }

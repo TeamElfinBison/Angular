@@ -17,10 +17,11 @@ export class RegisterComponent implements OnInit {
         this.user = new User();
     }
 
-    registerUser(ev) {
+    registerUser() {
         this.requester.registerUser(this.user)
             .subscribe((response: Response) => {
                 // handle response
+                console.log(response);
             });
     }
 }
