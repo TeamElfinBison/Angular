@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { HttpModule } from '@angular/http';
         CoreModule,
         FormsModule,
         AuthenticationModule,
-        HttpModule
+        HttpModule,
+        ToastModule.forRoot(),
     ],
     providers: [],
     bootstrap: [AppComponent]
