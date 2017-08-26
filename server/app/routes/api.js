@@ -11,22 +11,30 @@ const getResponse = (status, message, ...data) => {
 };
 
 const sendSuccess = (msg, res, ...data) => {
-    const response = getResponse(200, typeof msg === 'object' ? msg.message : msg, ...data);
+    const response = getResponse(
+        200,
+        typeof msg === 'object' ? msg.message : msg,
+        ...data
+    );
+
     res.status(200).json(response);
-}
+};
 
 const sendError = (err, res) => {
-    const response = getResponse(400, typeof err === 'object' ? err.message : err);
+    const response = getResponse(
+        400,
+        typeof err === 'object' ? err.message : err
+    );
+
     res.status(400).json(response);
 };
 
 const attachRouter = (data) => {
-
     const router = new Router();
     router
         .get('/users', (req, res) => {
             data
-                .getAll()
+                .getAllUsers()
                 .then((users) => sendSuccess('All users!', res, users))
                 .catch((err) => sendError(err, res));
         })
@@ -34,8 +42,8 @@ const attachRouter = (data) => {
             const user = req.body;
 
             data
-                .add(user)
-                .then((user) => sendSuccess('Register success!', res, user))
+                .addUser(user)
+                .then(() => sendSuccess('Registered successfully!', res, user))
                 .catch((error) => sendError(error, res));
         })
         .post('/login', (req, res) => {
@@ -43,7 +51,9 @@ const attachRouter = (data) => {
 
             data
                 .findUserByUsername(user.username)
-                .then((expUser) => data.validateUserPassword(expUser, user.password))
+                .then((expUser) => {
+                    return data.validateUserPassword(expUser, user.password);
+                })
                 .then(() => {
                     const jwtObject = {
                         _id: user._id,
