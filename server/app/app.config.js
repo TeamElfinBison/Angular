@@ -15,6 +15,8 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const configApp = (app, data) => {
+    // eslint-disable-next-line
+    app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));
     app.use(express.static(path.join(__dirname, '../../dist')));
 
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,7 +36,7 @@ const configApp = (app, data) => {
 
     passport.use(new JwtStrategy(options, (jwtPayload, done) => {
         data
-            .findById(jwtPayload._id)
+            .findUserByUsername(jwtPayload.username)
             .then((user) => {
                 if (user) {
                     return done(null, user);
