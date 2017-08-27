@@ -43,7 +43,7 @@ const attachRouter = (data) => {
             const user = req.body;
 
             data
-                .add(user)
+                .addUser(user)
                 .then(() => sendSuccess('Register success!', res, user))
                 .catch((error) => sendError(error, res));
         })
