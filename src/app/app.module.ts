@@ -14,11 +14,13 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,
