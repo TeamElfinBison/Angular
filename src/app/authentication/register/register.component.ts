@@ -24,8 +24,8 @@ export class RegisterComponent implements OnInit {
 
     registerUser() {
         this.userAuth.registerUser(this.user).subscribe(
-            (response) => this.notificator.showSuccess(response.message),
-            (err) => this.notificator.showError(JSON.parse(err._body).message),
+            (response) => this.notificator.showSuccess(response['message']),
+            (err) => this.notificator.showError(err.error.message),
             () => this.router.navigateByUrl('/login'));
     }
 }

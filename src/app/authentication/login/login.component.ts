@@ -27,12 +27,12 @@ export class LoginComponent implements OnInit {
     loginUser() {
         this.userAuth.loginUser(this.user).subscribe(
             (response) => {
-                this.cookieService.setCookie('token', response.data[0].token);
+                this.cookieService.setCookie('token', response['data'][0].token);
                 this.cookieService.setCookie('username', this.user.username);
 
-                this.notificator.showSuccess(response.message);
+                this.notificator.showSuccess(response['message']);
             },
-            (err) => this.notificator.showError(JSON.parse(err._body).message),
+            (err) => this.notificator.showError(err.error.message),
             () => this.router.navigateByUrl('/'));
     }
 }

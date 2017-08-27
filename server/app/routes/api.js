@@ -39,6 +39,16 @@ const attachRouter = (data) => {
                 .then((users) => sendSuccess('All users!', res, users))
                 .catch((err) => sendError(err, res));
         })
+        .get('/currentUser',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+
+                data
+                    .findById(user._id.toString())
+                    .then((currUser) => sendSuccess('Current user!', res, currUser))
+                    .catch((err) => sendError(err, res));
+            })
         .post('/register', (req, res) => {
             const user = req.body;
 

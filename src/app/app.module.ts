@@ -10,9 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { CookieService } from 'ngx-cookie-service';
+import { HttpClientModule } from '@angular/common/http';
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 
 @NgModule({
     declarations: [
@@ -28,8 +29,9 @@ import { CookieService } from 'ngx-cookie-service';
         CoreModule,
         FormsModule,
         AuthenticationModule,
-        HttpModule,
-        UsersModule
+        UsersModule,
+        HttpClientModule,
+        NgHttpLoaderModule
     ],
     providers: [
         CookieService

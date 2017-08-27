@@ -17,7 +17,7 @@ export class AllUsersComponent implements OnInit {
 
     ngOnInit() {
         this.usersDataService.getAllUsers()
-            .subscribe(response => this.users = response.data[0],
-            (err) => this.notificator.showError(JSON.parse(err._body).message));
+            .subscribe(response => this.users = response['data'][0],
+            (err) => this.notificator.showError(err.error.message));
     }
 }

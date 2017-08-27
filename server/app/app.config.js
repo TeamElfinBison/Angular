@@ -8,12 +8,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const config = require('../config');
+const cors = require('cors');
 
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const configApp = (app, data) => {
+    app.use(cors());
+
     // eslint-disable-next-line
     app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));
     app.use(express.static(path.join(__dirname, '../../dist')));
