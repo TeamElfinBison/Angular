@@ -1,9 +1,8 @@
 /* globals __dirname */
 const path = require('path');
-const express = require('express');
 
+const express = require('express');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -24,10 +23,10 @@ const configApp = (app, data) => {
 
     app.use(cookieParser());
     app.use(session({
-        store: new MongoStore({ url: config.DB_CONNECTION_STRING }),
         saveUninitialized: true,
         resave: false,
         secret: config.APP_SECRET,
+        cookie: { secure: true },
     }));
 
     const options = {};
