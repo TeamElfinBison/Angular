@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
         this.userAuth.loginUser(this.user).subscribe(
             (response) => {
                 this.cookieService.setCookie('token', response.data[0].token);
-                this.userAuth.isLoggedUser = true;
-                this.userAuth.loggedUserUsername = this.user.username;
+                this.cookieService.setCookie('username', this.user.username);
 
                 this.notificator.showSuccess(response.message);
             },

@@ -24,8 +24,7 @@ export class LogoutComponent implements OnInit {
         this.userAuth.logoutUser(header).subscribe(
             (response) => {
                 this.cookieService.removeCookie('token');
-                this.userAuth.isLoggedUser = false;
-                this.userAuth.loggedUserUsername = null;
+                this.cookieService.removeCookie('username');
 
                 this.notificator.showSuccess(response.message);
             },

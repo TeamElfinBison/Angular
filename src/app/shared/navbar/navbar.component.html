@@ -1,11 +1,13 @@
 <md-toolbar id="footer" color="primary">
     <a [routerLink]="['/']">Home</a>
+    <a [routerLink]="['/all']">All Users</a>
     <div class="user-info" *ngIf="isLoggedUser == false">
         <a [routerLink]="['/register']">Register</a>
         <a [routerLink]="['/login']">Login</a>
     </div>
     <div class="user-info" *ngIf="isLoggedUser == true">
         <span>Hello {{loggedUserUsername}}!</span>
+        <a [routerLink]="['/profile']">Profile</a>
         <a [routerLink]="['/logout']">Logout</a>
     </div>
 </md-toolbar>

@@ -2,7 +2,6 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-    MdSidenavModule,
     MdToolbarModule,
     MdButtonModule,
     MdIconModule,
@@ -15,24 +14,25 @@ import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
+
         MdButtonModule,
-        MdSidenavModule,
         MdToolbarModule,
         MdIconModule,
         MdInputModule,
         MdMenuModule,
-        RouterModule
     ],
     declarations: [
         NavbarComponent
     ],
     exports: [
-        CommonModule,
         NavbarComponent,
+
+        CommonModule,
+
         MdButtonModule,
         MdToolbarModule,
         MdIconModule,
-        MdSidenavModule,
         MdInputModule,
         MdMenuModule
     ]

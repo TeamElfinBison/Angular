@@ -13,12 +13,12 @@ export class NavbarComponent implements OnInit, DoCheck {
     constructor(private readonly userAuth: UserAuthService) { }
 
     ngOnInit() {
-        this.isLoggedUser = this.userAuth.isLoggedUser;
-        this.loggedUserUsername = this.userAuth.loggedUserUsername;
+        this.isLoggedUser = this.userAuth.isLoggedUser();
+        this.loggedUserUsername = this.userAuth.getUserUsername();
     }
 
     ngDoCheck() {
-        this.isLoggedUser = this.userAuth.isLoggedUser;
-        this.loggedUserUsername = this.userAuth.loggedUserUsername;
+        this.isLoggedUser = this.userAuth.isLoggedUser();
+        this.loggedUserUsername = this.userAuth.getUserUsername();
     }
 }

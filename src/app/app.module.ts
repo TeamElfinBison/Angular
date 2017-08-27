@@ -1,3 +1,4 @@
+import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -28,6 +29,7 @@ import { CookieService } from 'ngx-cookie-service';
         FormsModule,
         AuthenticationModule,
         HttpModule,
+        UsersModule
     ],
     providers: [
         CookieService
