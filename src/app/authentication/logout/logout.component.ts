@@ -1,18 +1,16 @@
+import { CookieService } from '../../core/cookie/cookie.service';
 import { NotificatorService } from './../../core/notificator/notificator.service';
 import { UserAuthService } from './../services/user-auth/user-auth.service';
 import { User } from './../../models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from '../../core/cookie/cookie.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    selector: 'app-logout',
+    templateUrl: './logout.component.html',
+    styleUrls: ['./logout.component.css']
 })
-export class LoginComponent implements OnInit {
-
-    public user: User;
+export class LogoutComponent implements OnInit {
 
     constructor(
         private readonly requester: UserAuthService,
@@ -21,13 +19,11 @@ export class LoginComponent implements OnInit {
         private readonly router: Router) { }
 
     ngOnInit() {
-        this.user = new User();
-    }
+        const header = { token: this.cookieService.getCookie('token') };
 
-    loginUser() {
-        this.requester.loginUser(this.user).subscribe(
+        this.requester.logoutUser(header).subscribe(
             (response) => {
-                this.cookieService.setCookie('token', response.data[0].token);
+                this.cookieService.removeCookie('token');
                 this.notificator.showSuccess(response.message);
             },
             (err) => this.notificator.showError(JSON.parse(err._body).message),

@@ -1,9 +1,13 @@
+import { CookieService } from './cookie/cookie.service';
+import { NotificatorService } from './notificator/notificator.service';
 import { RequesterService } from './requester/requester.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 @NgModule({
     providers: [
-        RequesterService
+        RequesterService,
+        NotificatorService,
+        CookieService
     ]
 })
 export class CoreModule {

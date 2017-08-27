@@ -1,7 +1,7 @@
-import { RequesterService } from './../../core/requester/requester.service';
+import { NotificatorService } from './../../core/notificator/notificator.service';
+import { UserAuthService } from './../services/user-auth/user-auth.service';
 import { User } from './../../models/User';
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,24 +14,18 @@ export class RegisterComponent implements OnInit {
     public user: User;
 
     constructor(
-        private readonly requester: RequesterService,
-        private readonly toastr: ToastsManager,
-        private readonly vcr: ViewContainerRef,
-        private readonly router: Router) {
-        this.toastr.setRootViewContainerRef(vcr);
-    }
+        private readonly requester: UserAuthService,
+        private readonly notificator: NotificatorService,
+        private readonly router: Router) { }
 
     ngOnInit() {
         this.user = new User();
     }
 
     registerUser() {
-        this.requester.registerUser(this.user)
-            .subscribe((response) => {
-                this.toastr
-                    .success(response.message, 'Success!')
-                    .then(() => this.router.navigateByUrl('/login'));
-            },
-            (err) => this.toastr.error(err, 'Error!'));
+        this.requester.registerUser(this.user).subscribe(
+            (response) => this.notificator.showSuccess(response.message),
+            (err) => this.notificator.showError(JSON.parse(err._body).message),
+            () => this.router.navigateByUrl('/login'));
     }
 }

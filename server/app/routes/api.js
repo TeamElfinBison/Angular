@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 const config = require('../../config');
 
 const getResponse = (status, message, ...data) => {
@@ -21,7 +22,6 @@ const sendError = (err, res) => {
 };
 
 const attachRouter = (data) => {
-
     const router = new Router();
     router
         .get('/users', (req, res) => {
@@ -35,9 +35,14 @@ const attachRouter = (data) => {
 
             data
                 .add(user)
-                .then((user) => sendSuccess('Register success!', res, user))
+                .then(() => sendSuccess('Register success!', res, user))
                 .catch((error) => sendError(error, res));
         })
+        .post('/logout',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                sendSuccess('Logout success!', res);
+            })
         .post('/login', (req, res) => {
             const user = req.body;
 

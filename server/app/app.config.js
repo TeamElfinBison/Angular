@@ -36,7 +36,7 @@ const configApp = (app, data) => {
 
     passport.use(new JwtStrategy(options, (jwtPayload, done) => {
         data
-            .findById(jwtPayload._id)
+            .findUserByUsername(jwtPayload.username)
             .then((user) => {
                 if (user) {
                     return done(null, user);

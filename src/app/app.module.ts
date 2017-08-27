@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [
@@ -21,14 +22,18 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
+        ToastModule.forRoot(),
         SharedModule,
         CoreModule,
         FormsModule,
         AuthenticationModule,
         HttpModule,
-        ToastModule.forRoot(),
     ],
-    providers: [],
-    bootstrap: [AppComponent]
+    providers: [
+        CookieService
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }

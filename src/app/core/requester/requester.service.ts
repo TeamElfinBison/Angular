@@ -1,28 +1,29 @@
 import { User } from './../../models/User';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RequesterService {
+    private REQUEST_DOMAIN = 'http://localhost:1234/api';
 
     constructor(private readonly http: Http) { }
 
-    getUsers() {
+    get(resource: string, headers?: Headers) {
         return this.http
-            .get('http://localhost:1234/api/users')
+            .get(this.REQUEST_DOMAIN + resource, { headers })
             .map(res => res.json());
     }
 
-    registerUser(user: User) {
+    post(resource: string, body: any, headers?: Headers) {
         return this.http
-            .post('http://localhost:1234/api/register', user)
+            .post(this.REQUEST_DOMAIN + resource, body, { headers })
             .map(res => res.json());
     }
 
-    loginUser(user: User) {
+    put(resource: string, body: any, headers?: Headers) {
         return this.http
-            .post('http://localhost:1234/api/login', user)
+            .put(this.REQUEST_DOMAIN + resource, body, { headers })
             .map(res => res.json());
     }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { NotificatorService } from './core/notificator/notificator.service';
+import { Component, ViewContainerRef } from '@angular/core';
 
 @Component({
     selector: 'app-root',
@@ -6,4 +7,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    constructor(
+        private readonly notificator: NotificatorService,
+        private readonly vcr: ViewContainerRef) {
+        this.notificator.init(vcr);
+    }
 }
