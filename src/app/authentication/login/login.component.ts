@@ -1,5 +1,5 @@
 import { NotificatorService } from './../../core/notificator/notificator.service';
-import { UserAuthService } from './../../core/user-auth/user-auth.service';
+import { UserAuthService } from './../user-auth/user-auth.service';
 import { User } from './../../models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

@@ -1,3 +1,4 @@
+import { UserAuthService } from './user-auth/user-auth.service';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,9 @@ import { LogoutComponent } from './logout/logout.component';
         RegisterComponent,
         LoginComponent,
         LogoutComponent
+    ],
+    providers: [
+        UserAuthService
     ]
 })
 export class AuthenticationModule { }

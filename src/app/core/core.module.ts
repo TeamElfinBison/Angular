@@ -1,4 +1,4 @@
-import { UserAuthService } from './user-auth/user-auth.service';
+import { UserInfoService } from './user-info/user-info.service';
 import { CookieService } from './cookie/cookie.service';
 import { NotificatorService } from './notificator/notificator.service';
 import { RequesterService } from './requester/requester.service';
@@ -9,7 +9,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
         RequesterService,
         NotificatorService,
         CookieService,
-        UserAuthService
+        UserInfoService
     ]
 })
 export class CoreModule {

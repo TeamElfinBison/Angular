@@ -1,16 +1,22 @@
-import { SharedModule } from './../shared/shared.module';
+import { UsersDataService } from './users-data/users-data.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from './profile/profile.component';
+
+import { UsersRoutingModule } from './users-routing.module';
 import { AllUsersComponent } from './all-users/all-users.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     imports: [
-        SharedModule
+        CommonModule,
+        UsersRoutingModule
     ],
     declarations: [
-        ProfileComponent,
         AllUsersComponent,
+        ProfileComponent
+    ],
+    providers: [
+        UsersDataService
     ]
 })
 export class UsersModule { }

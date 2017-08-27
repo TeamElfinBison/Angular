@@ -1,4 +1,4 @@
-import { UserAuthService } from './../../core/user-auth/user-auth.service';
+import { UserInfoService } from './../../core/user-info/user-info.service';
 import { Component, OnInit, DoCheck } from '@angular/core';
 
 @Component({
@@ -10,15 +10,15 @@ export class NavbarComponent implements OnInit, DoCheck {
     public isLoggedUser: boolean;
     public loggedUserUsername: string;
 
-    constructor(private readonly userAuth: UserAuthService) { }
+    constructor(private readonly userInfo: UserInfoService) { }
 
     ngOnInit() {
-        this.isLoggedUser = this.userAuth.isLoggedUser();
-        this.loggedUserUsername = this.userAuth.getUserUsername();
+        this.isLoggedUser = this.userInfo.isLoggedUser();
+        this.loggedUserUsername = this.userInfo.getUserUsername();
     }
 
     ngDoCheck() {
-        this.isLoggedUser = this.userAuth.isLoggedUser();
-        this.loggedUserUsername = this.userAuth.getUserUsername();
+        this.isLoggedUser = this.userInfo.isLoggedUser();
+        this.loggedUserUsername = this.userInfo.getUserUsername();
     }
 }
