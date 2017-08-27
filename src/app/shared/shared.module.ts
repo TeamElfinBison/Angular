@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -5,7 +6,8 @@ import {
     MdToolbarModule,
     MdButtonModule,
     MdIconModule,
-    MdInputModule
+    MdInputModule,
+    MdMenuModule
 } from '@angular/material';
 
 import { NavbarComponent } from './navbar/navbar.component';
@@ -17,7 +19,9 @@ import { NavbarComponent } from './navbar/navbar.component';
         MdSidenavModule,
         MdToolbarModule,
         MdIconModule,
-        MdInputModule
+        MdInputModule,
+        MdMenuModule,
+        RouterModule
     ],
     declarations: [
         NavbarComponent
@@ -29,7 +33,8 @@ import { NavbarComponent } from './navbar/navbar.component';
         MdToolbarModule,
         MdIconModule,
         MdSidenavModule,
-        MdInputModule
+        MdInputModule,
+        MdMenuModule
     ]
 })
 export class SharedModule { }

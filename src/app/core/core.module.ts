@@ -1,3 +1,4 @@
+import { UserAuthService } from './user-auth/user-auth.service';
 import { CookieService } from './cookie/cookie.service';
 import { NotificatorService } from './notificator/notificator.service';
 import { RequesterService } from './requester/requester.service';
@@ -7,7 +8,8 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
     providers: [
         RequesterService,
         NotificatorService,
-        CookieService
+        CookieService,
+        UserAuthService
     ]
 })
 export class CoreModule {

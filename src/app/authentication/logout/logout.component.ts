@@ -1,6 +1,6 @@
 import { CookieService } from '../../core/cookie/cookie.service';
 import { NotificatorService } from './../../core/notificator/notificator.service';
-import { UserAuthService } from './../services/user-auth/user-auth.service';
+import { UserAuthService } from './../../core/user-auth/user-auth.service';
 import { User } from './../../models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class LogoutComponent implements OnInit {
 
     constructor(
-        private readonly requester: UserAuthService,
+        private readonly userAuth: UserAuthService,
         private readonly notificator: NotificatorService,
         private readonly cookieService: CookieService,
         private readonly router: Router) { }
@@ -21,9 +21,12 @@ export class LogoutComponent implements OnInit {
     ngOnInit() {
         const header = { token: this.cookieService.getCookie('token') };
 
-        this.requester.logoutUser(header).subscribe(
+        this.userAuth.logoutUser(header).subscribe(
             (response) => {
                 this.cookieService.removeCookie('token');
+                this.userAuth.isLoggedUser = false;
+                this.userAuth.loggedUserUsername = null;
+
                 this.notificator.showSuccess(response.message);
             },
             (err) => this.notificator.showError(JSON.parse(err._body).message),

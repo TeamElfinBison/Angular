@@ -3,7 +3,6 @@ import { CookieService as CookieSer } from 'ngx-cookie-service';
 
 @Injectable()
 export class CookieService {
-
     constructor(private readonly cookieService: CookieSer) { }
 
     getCookie(name: string) {
