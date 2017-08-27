@@ -16,9 +16,6 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const configApp = (app, data) => {
     app.use(cors());
-
-    // eslint-disable-next-line
-    app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));
     app.use(express.static(path.join(__dirname, '../../dist')));
 
     app.use(bodyParser.urlencoded({ extended: true }));
