@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
         BrowserAnimationsModule,
         AppRoutingModule,
         ToastModule.forRoot(),
+        NgbModule.forRoot(),
         SharedModule,
         CoreModule,
         FormsModule,

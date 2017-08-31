@@ -1,13 +1,59 @@
-<md-toolbar id="footer" color="primary">
-    <a [routerLink]="['/']">Home</a>
-    <a [routerLink]="['/users/all']">All Users</a>
-    <div class="user-info" *ngIf="isLoggedUser == false">
-        <a [routerLink]="['/register']">Register</a>
-        <a [routerLink]="['/login']">Login</a>
+<header>
+    <div id="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="home-account" *ngIf="isLoggedUser == false">
+                        <a [routerLink]="['/login']">Login</a>
+                        <a [routerLink]="['/register']">Register</a>
+                    </div>
+                    <div class="home-account" *ngIf="isLoggedUser == true">
+                        <span>Hello {{loggedUserUsername}}!</span>
+                        <a [routerLink]="['/users/profile']">Profile</a>
+                        <a [routerLink]="['/logout']">LogOut</a>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="cart-info">
+                        <i class="fa fa-shopping-cart"></i> (
+                        <a href="#">5 items</a>) in your cart (<a href="#">$45.80</a>)
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="user-info" *ngIf="isLoggedUser == true">
-        <span>Hello {{loggedUserUsername}}!</span>
-        <a [routerLink]="['/users/profile']">Profile</a>
-        <a [routerLink]="['/logout']">Logout</a>
+    <div id="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <a href="#"><img src="/assets/images/logo.png" title="Grill Template" alt="Grill Website Template"></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="main-menu">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Products</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</md-toolbar>
+</header>
+<div id="heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-content">
+                    <h2>Delicious Pizza</h2>
+                    <span>With free beer!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

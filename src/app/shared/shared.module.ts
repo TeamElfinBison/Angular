@@ -10,11 +10,15 @@ import {
 } from '@angular/material';
 
 import { NavbarComponent } from './navbar/navbar.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
+        NgbModule,
 
         MdButtonModule,
         MdToolbarModule,
@@ -23,11 +27,12 @@ import { NavbarComponent } from './navbar/navbar.component';
         MdMenuModule,
     ],
     declarations: [
-        NavbarComponent
+        NavbarComponent,
+        FooterComponent
     ],
     exports: [
         NavbarComponent,
-
+        FooterComponent,
         CommonModule,
 
         MdButtonModule,

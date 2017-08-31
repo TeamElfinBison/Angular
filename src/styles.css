@@ -1,12 +1,212 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-html {
-    height: 100%;
-}
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~font-awesome/css/font-awesome.min.css';
+
+/*-- Basic --*/
 
 body {
     margin: 0;
-    max-width: 100%;
-    height: 100%;
 }
+
+a {
+    text-decoration: none;
+    color: #f78e21;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #f78e21;
+}
+
+.blue {
+    color: #09F;
+}
+
+.green {
+    color: #0A0;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #666;
+}
+
+.heading-section {
+    text-align: center;
+    padding: 100px 0 80px 0;
+}
+
+.heading-section h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #333;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.space30 {
+    margin-bottom: 30px;
+}
+
+.space50 {
+    margin-bottom: 50px;
+}
+
+
+/*--- RESPONSIVE ---*/
+
+@media screen and (max-width: 990px) {
+    .home-account {
+        text-align: center;
+        display: block;
+    }
+    .cart-info {
+        text-align: center;
+        display: block;
+    }
+    .logo {
+        text-align: center;
+    }
+    .search-box {
+        display: none;
+    }
+    .slider-caption {
+        display: none;
+    }
+    .service-item {
+        margin-top: 40px;
+    }
+    .footer-title {
+        margin-top: 60px;
+    }
+    .bottom-footer {
+        text-align: center;
+    }
+    .timeline-thumb {
+        margin-top: 30px;
+        border-bottom: none;
+    }
+    .team-thumb {
+        margin-top: 30px;
+    }
+    .side-bar {
+        margin-top: 100px;
+    }
+    .side-bar h4 {
+        width: 100%;
+    }
+    .send-message input {
+        margin-top: 20px;
+    }
+    .info {
+        margin-top: 60px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .home-account {
+        text-align: center;
+        display: block;
+    }
+    .cart-info {
+        text-align: center;
+        display: block;
+    }
+    .logo {
+        text-align: center;
+    }
+    .search-box {
+        display: none;
+    }
+    .content-hide p {
+        display: none;
+    }
+    .slider-caption {
+        display: none;
+    }
+    .service-item {
+        margin-top: 40px;
+    }
+    .footer-title {
+        margin-top: 60px;
+    }
+    .bottom-footer {
+        text-align: center;
+    }
+    .timeline-thumb {
+        margin-top: 30px;
+        border-bottom: none;
+    }
+    .team-thumb {
+        margin-top: 30px;
+    }
+    .side-bar {
+        margin-top: 100px;
+    }
+    .side-bar h4 {
+        width: 100%;
+    }
+    .send-message input {
+        margin-top: 20px;
+    }
+    .info {
+        margin-top: 60px;
+        text-align: center;
+    }
+    .logo {
+        padding-bottom: 60px;
+    }
+    .main-menu li {
+        display: block;
+        margin-top: -60px;
+        margin-right: -35px;
+    }
+    #heading-section img {
+        display: none;
+    }
+    .divide-line img {
+        display: none;
+    }
+    .top-footer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .slider-caption {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .heading-section img {
+        display: none;
+    }
+    body {
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (min-width: 995px) {
+    .hover-iner span {
+        margin-top: 160px;
+    }
+    body {
+        overflow-x: hidden;
+    }
+}
+
+
+/*--- END RESPONSIVE ---*/
