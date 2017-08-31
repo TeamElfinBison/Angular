@@ -12,6 +12,8 @@ import {
 import { NavbarComponent } from './navbar/navbar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from '../authentication/login/login.component';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { FooterComponent } from './footer/footer.component';
         CommonModule,
         RouterModule,
         NgbModule,
+        BootstrapModalModule,
 
         MdButtonModule,
         MdToolbarModule,
@@ -28,8 +31,11 @@ import { FooterComponent } from './footer/footer.component';
     ],
     declarations: [
         NavbarComponent,
-        FooterComponent
-    ],
+        FooterComponent,
+  ],
+  entryComponents: [
+      LoginComponent
+  ],
     exports: [
         NavbarComponent,
         FooterComponent,

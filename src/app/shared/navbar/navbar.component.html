@@ -4,20 +4,20 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="home-account" *ngIf="isLoggedUser == false">
-                        <a [routerLink]="['/login']">Login</a>
-                        <a [routerLink]="['/register']">Register</a>
+                        <a (click)=loginModal()>Log in</a>
+                        <a (click)=registerModal()>Register</a>
                     </div>
                     <div class="home-account" *ngIf="isLoggedUser == true">
-                        <span>Hello {{loggedUserUsername}}!</span>
-                        <a [routerLink]="['/users/profile']">Profile</a>
-                        <a [routerLink]="['/logout']">LogOut</a>
+                        <span>Hello </span>
+                        <a [routerLink]="['/users/profile']"> {{loggedUserUsername}}!</a>
+                        <a [routerLink]="['/logout']">Log out</a>
 
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="isLoggedUser == true">
                     <div class="cart-info">
                         <i class="fa fa-shopping-cart"></i> (
-                        <a href="#">5 items</a>) in your cart (<a href="#">$45.80</a>)
+                        <a [routerLink]="['/cart']">{{cartitems || '0'}} items </a>) in your cart (<a [routerLink]="['/cart']"> {{cartbill || '0'}} $ </a>)
                     </div>
                 </div>
             </div>
@@ -28,16 +28,16 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="logo">
-                        <a href="#"><img src="/assets/images/logo.png" title="Grill Template" alt="Grill Website Template"></a>
+                        <a href="#"><img src="/assets/images/logo.png" title="NG Pizza" alt="NG Pizza Logo"></a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="main-menu">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Products</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a [routerLink]="['/home']">Home</a></li>
+                            <li><a [routerLink]="['/about']">About</a></li>
+                            <li><a [routerLink]="['/products']">Products</a></li>
+                            <li><a [routerLink]="['/purchase']">Purchase</a></li>
                         </ul>
                     </div>
                 </div>

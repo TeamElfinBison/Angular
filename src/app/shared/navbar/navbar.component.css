@@ -13,6 +13,10 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+#top-header a:hover {
+    color: #09F
+}
+
 .cart-info {
     text-align: right;
     padding: 8px 0;
