@@ -6,14 +6,14 @@ import { LoginComponent } from './authentication/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { ProductsComponent } from './components/products/products.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'users', loadChildren: './users/users.module#UsersModule' },
 
-    { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'products', component: ProductsComponent },
     { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService] },
 
     { path: '**', component: NotFoundComponent },

@@ -14,6 +14,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from '../authentication/login/login.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { RegisterComponent } from '../authentication/register/register.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
         FooterComponent,
   ],
   entryComponents: [
-      LoginComponent
+      LoginComponent,
+      RegisterComponent
   ],
     exports: [
         NavbarComponent,

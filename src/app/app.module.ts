@@ -16,12 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        ProductsComponent
     ],
     imports: [
         BrowserModule,
