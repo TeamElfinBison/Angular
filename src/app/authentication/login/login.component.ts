@@ -43,7 +43,7 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
                 this.close();
             },
             (err) => this.notificator.showError(err.error.message),
-            () => this.router.navigateByUrl('/'));
+            );
     }
 }
 

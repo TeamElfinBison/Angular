@@ -5,6 +5,7 @@ import { NotificatorService } from '../../core/notificator/notificator.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { Router } from '@angular/router';
 import { UserInfoService } from '../../core/user-info/user-info.service';
+import { LoginComponent } from '../../authentication/login/login.component';
 export interface CustomPizzaModal {
   title: string;
 }
@@ -29,7 +30,6 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
     }
 
   ngOnInit() {
-            this.isLoggedUser = this.userInfo.isLoggedUser();
 
     this.custompizza = new CustomPizza;
 
@@ -276,6 +276,14 @@ if (type === 'dough') {
 }
 
 addToCart() {
+  this.isLoggedUser = this.userInfo.isLoggedUser();
+
+  if (!this.isLoggedUser) {
+    this.notificator.showError('You have to be loged!');
+    this.loginModal();
+    return;
+  }
+
   let isDoughSelected = false;
   const selectedPizza = {
     dough: {},
@@ -332,4 +340,7 @@ findObjectByKey(array, key, value) {
     }
     return null;
 }
+  loginModal() {
+    this.dialogService.addDialog(LoginComponent, {title: 'Log in'});
+  }
 }
