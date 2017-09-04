@@ -77,3 +77,44 @@ label:before {
     padding: 10px;
     border-bottom: 1px solid black;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.heading-section {
+    padding: 0;
+}
+
+.padding-top-bottom {
+    padding: 35px 0;
+}
+
+
+/*-- Services --*/
+
+.service-item {
+    text-align: center;
+}
+
+.icon i {
+    border-radius: 50%;
+    border: 20px solid #f78e21;
+    color: #f78e21;
+    font-size: 28px;
+    line-height: 80px;
+    width: 120px;
+    height: 120px;
+}
+
+.service-item h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    margin-top: 25px;
+}
+
+
+/*-- End Services --*/

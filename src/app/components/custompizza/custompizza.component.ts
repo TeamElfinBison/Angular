@@ -32,6 +32,8 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
             this.isLoggedUser = this.userInfo.isLoggedUser();
 
     this.custompizza = new CustomPizza;
+
+    // get custompizza from DB!
     this.custompizza = {
   'name': 'Custom pizza',
   'dough': [
@@ -274,8 +276,52 @@ if (type === 'dough') {
 }
 
 addToCart() {
-console.log(this.custompizza.name + ' Added to cart');
-// clear form
+  let isDoughSelected = false;
+  const selectedPizza = {
+    dough: {},
+    sauce: [],
+    cheese: [],
+    meat: [],
+    vegetables: [],
+  };
+  this.custompizza.dough.forEach(dough => {
+    if (dough.add) {
+      isDoughSelected = true;
+      selectedPizza.dough = dough;
+    }
+  });
+   this.custompizza.sauce.forEach(sauce => {
+    if (sauce.add) {
+      selectedPizza.sauce.push(sauce);
+    }
+  });
+  this.custompizza.cheese.forEach(cheese => {
+    if (cheese.add) {
+      selectedPizza.cheese.push(cheese);
+    }
+  });
+  this.custompizza.meat.forEach(meat => {
+    if (meat.add) {
+      selectedPizza.meat.push(meat);
+    }
+  });
+  this.custompizza.vegetables.forEach(vegetables => {
+    if (vegetables.add) {
+      selectedPizza.vegetables.push(vegetables);
+    }
+  });
+
+
+  if (isDoughSelected) {
+
+    // Add selected pizza to cart
+    console.log(JSON.stringify(selectedPizza) + ' on price: ' + this.price + '$ Added to cart');
+    this.notificator.showSuccess('Custom pizza on price: ' + this.price + '$ Added to cart');
+    this.router.navigate(['/products']);
+  }else {
+  console.log('You have to select dought first!');
+    this.notificator.showError('You have to select dought first!');
+  }
 }
 
 findObjectByKey(array, key, value) {
