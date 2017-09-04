@@ -14,7 +14,8 @@
 }
 
 #top-header a:hover {
-    color: #09F
+    color: #09F;
+    cursor: pointer;
 }
 
 .cart-info {

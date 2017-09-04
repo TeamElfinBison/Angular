@@ -7,6 +7,8 @@ import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
+import { AddComponent } from './components/products/add/add.component';
+import { CustompizzaComponent } from './components/custompizza/custompizza.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,6 +16,8 @@ const routes: Routes = [
     { path: 'users', loadChildren: './users/users.module#UsersModule' },
 
     { path: 'products', component: ProductsComponent },
+    { path: 'custompizza', component: CustompizzaComponent },
+    { path: 'products/add', component: AddComponent },
     { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService] },
 
     { path: '**', component: NotFoundComponent },

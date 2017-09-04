@@ -15,8 +15,7 @@ export interface RegisterModal {
     styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnInit, RegisterModal{ 
-
+export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnInit, RegisterModal {
     public user: User;
     title: string;
     constructor(
@@ -34,6 +33,8 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
         this.userAuth.registerUser(this.user).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message),
-            () => this.close());
+            () => {
+                this.close();
+            });
     }
 }

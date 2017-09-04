@@ -17,13 +17,17 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ProductsComponent } from './components/products/products.component';
+import { AddComponent } from './components/products/add/add.component';
+import { CustompizzaComponent } from './components/custompizza/custompizza.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         NotFoundComponent,
-        ProductsComponent
+        ProductsComponent,
+        AddComponent,
+        CustompizzaComponent
     ],
     imports: [
         BrowserModule,
