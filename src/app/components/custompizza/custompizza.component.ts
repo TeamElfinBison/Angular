@@ -4,7 +4,7 @@ import { CustomPizzaService } from './custompizza.service';
 import { NotificatorService } from '../../core/notificator/notificator.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { Router } from '@angular/router';
-import { UserInfoService } from "../../core/user-info/user-info.service";
+import { UserInfoService } from '../../core/user-info/user-info.service';
 export interface CustomPizzaModal {
   title: string;
 }
