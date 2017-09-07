@@ -9,6 +9,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { PaginationComponent } from './pagination/pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -18,10 +20,12 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
         NgbModule,
         BootstrapModalModule,
         AuthenticationModule,
+        NgxPaginationModule
     ],
     declarations: [
         NavbarComponent,
         FooterComponent,
+        PaginationComponent,
     ],
     entryComponents: [
         LoginComponent,
@@ -33,7 +37,9 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
         LoginComponent,
         RegisterComponent,
         LogoutComponent,
+        PaginationComponent,
         CommonModule,
+        NgxPaginationModule
     ]
 })
 export class SharedModule { }

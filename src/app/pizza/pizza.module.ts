@@ -11,12 +11,12 @@ import { AllPizzaComponent } from './all-pizza/all-pizza.component';
 @NgModule({
     declarations: [
         CustompizzaComponent,
-        AllPizzaComponent
+        AllPizzaComponent,
     ],
     imports: [
         SharedModule,
         PizzaRoutingModule,
-        FormsModule
+        FormsModule,
     ],
     providers: [
         PizzaDataService

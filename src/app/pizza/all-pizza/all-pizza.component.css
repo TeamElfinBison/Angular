@@ -151,21 +151,25 @@
     transition: all 0.3s ease-in;
 }
 
-.pagination {
+
+/*- End Products --*/
+
+.my-pagination {
     margin-top: 60px;
 }
 
-.pagination ul {
+.my-pagination /deep/ .ngx-pagination ul {
     padding: 0;
     margin: 0;
 }
 
-.pagination li {
+.my-pagination /deep/ .ngx-pagination li {
     list-style: none;
     display: inline-block;
 }
 
-.pagination a {
+.my-pagination /deep/ .ngx-pagination a,
+.my-pagination /deep/ .ngx-pagination div {
     background-color: #444;
     padding: 10px 20px;
     font-size: 18px;
@@ -175,9 +179,14 @@
     text-align: center;
 }
 
-.pagination a:hover {
+.my-pagination /deep/ .ngx-pagination div {
     background-color: #f78e21;
 }
 
+.my-pagination /deep/ .ngx-pagination .current {
+    background-color: white;
+}
 
-/*- End Products --*/
+.my-pagination /deep/ .ngx-pagination a:hover {
+    background-color: #f78e21;
+}

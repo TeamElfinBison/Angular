@@ -36,11 +36,11 @@ import { DialogService } from 'ng2-bootstrap-modal';
         UsersModule,
         HttpClientModule,
         NgHttpLoaderModule,
-        PizzaModule
+        PizzaModule,
     ],
     providers: [
         CookieService,
-        DialogService
+        DialogService,
     ],
     bootstrap: [
         AppComponent
