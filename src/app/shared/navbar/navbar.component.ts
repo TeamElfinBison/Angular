@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit, DoCheck {
         this.dialogService.addDialog(LoginComponent, { title: 'Log in' });
     }
     registerModal() {
-        this.dialogService.addDialog(RegisterComponent, { title: 'Log in' });
+        this.dialogService.addDialog(RegisterComponent, { title: 'Register' });
     }
 }
 
