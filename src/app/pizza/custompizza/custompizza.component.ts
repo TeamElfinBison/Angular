@@ -1,5 +1,7 @@
+import { PizzaDataService } from './../pizza-data/pizza-data.service';
+import { CustomPizza } from './../../models/CustomPizza';
 import { Component, OnInit } from '@angular/core';
-import { CustomPizza } from '../../models/Pizza';
+import { Pizza } from '../../models/Pizza';
 import { NotificatorService } from '../../core/notificator/notificator.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { Router } from '@angular/router';
@@ -23,13 +25,27 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
         private readonly userInfo: UserInfoService,
         dialogService: DialogService,
         private readonly notificator: NotificatorService,
+        private readonly pizzaDataService: PizzaDataService,
         private readonly router: Router) {
         super(dialogService);
     }
 
     ngOnInit() {
+        this.custompizza = new CustomPizza();
 
-        this.custompizza = new CustomPizza;
+        this.pizzaDataService.getProducts()
+            .subscribe(response => {
+                response['data'][0]
+                    .forEach(product => {
+                        ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
+                            .forEach(type => {
+                                if (product[type]) {
+                                    this.custompizza[type] = product[type];
+                                }
+                            });
+                    });
+            },
+            (err) => this.notificator.showError(err.error.message));
     }
     add(el) {
         const type = el.target.parentElement.parentElement.parentElement.attributes.ngmodelgroup.nodeValue;

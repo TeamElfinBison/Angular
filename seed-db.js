@@ -250,52 +250,52 @@ const products = [{
 
 const pizza = [{
         'name': 'Mediteraneo',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1314medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1314medium.png',
         'price': 2,
     },
     {
         'name': 'Margarita',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1265medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1265medium.png',
         'price': 3,
     },
     {
         'name': 'Carbonara',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1360medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1360medium.png',
         'price': 1.5,
     },
     {
         'name': 'American Hot',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1291medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1291medium.png',
         'price': 2.1,
     },
     {
         'name': 'Peperoni',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1293medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1293medium.png',
         'price': 4,
     },
     {
         'name': 'Hawai',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1313medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1313medium.png',
         'price': 3.2,
     },
     {
         'name': 'Meat Mania',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1364medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1364medium.png',
         'price': 2.7,
     },
     {
         'name': 'Burger Pizza',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1505medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1505medium.png',
         'price': 3,
     },
     {
         'name': 'Chorizana',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1361medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1361medium.png',
         'price': 2.8,
     },
     {
         'name': 'Pizza Ton',
-        'img-url': 'http://www.dominos.bg/gallery/fmobile/1363medium.png',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1363medium.png',
         'price': 4.7,
     },
 ];

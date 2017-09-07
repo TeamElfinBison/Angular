@@ -6,9 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UsersDataService {
 
-    constructor(
-        private readonly requester: RequesterService,
-    ) { }
+    constructor(private readonly requester: RequesterService) { }
 
     getAllUsers() {
         return this.requester.get('/api/users');
@@ -16,7 +14,6 @@ export class UsersDataService {
 
     getCurrentUserInfo(token: string) {
         const headers = new HttpHeaders().set('token', token);
-
         return this.requester.get('/api/currentUser', headers);
     }
 }

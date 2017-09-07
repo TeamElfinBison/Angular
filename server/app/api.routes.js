@@ -1,34 +1,8 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const config = require('../../config');
-
-const getResponse = (status, message, ...data) => {
-    return {
-        status,
-        data,
-        message,
-    };
-};
-
-const sendSuccess = (msg, res, ...data) => {
-    const response = getResponse(
-        200,
-        typeof msg === 'object' ? msg.message : msg,
-        ...data
-    );
-
-    res.status(200).json(response);
-};
-
-const sendError = (err, res) => {
-    const response = getResponse(
-        400,
-        typeof err === 'object' ? err.message : err
-    );
-
-    res.status(400).json(response);
-};
+const config = require('../config');
+const { sendSuccess, sendError } = require('./responses');
 
 const attachRouter = (data) => {
     const router = new Router();
@@ -46,7 +20,7 @@ const attachRouter = (data) => {
 
                 data
                     .findById(user._id.toString())
-                    .then((currUser) => sendSuccess('Current user!', res, currUser))
+                    .then((curr) => sendSuccess('Current user!', res, curr))
                     .catch((err) => sendError(err, res));
             })
         .post('/register', (req, res) => {
@@ -82,6 +56,18 @@ const attachRouter = (data) => {
 
                     sendSuccess('Login success!', res, { token });
                 })
+                .catch((error) => sendError(error, res));
+        })
+        .get('/products', (req, res) => {
+            data
+                .getAllProducts()
+                .then((products) => sendSuccess('All products!', res, products))
+                .catch((error) => sendError(error, res));
+        })
+        .get('/pizza', (req, res) => {
+            data
+                .getAllPizza()
+                .then((pizza) => sendSuccess('All pizza!', res, pizza))
                 .catch((error) => sendError(error, res));
         });
 

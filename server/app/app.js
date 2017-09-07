@@ -7,7 +7,7 @@ const app = express();
 const init = (data) => {
     require('./app.config')(app, data);
 
-    const api = require('./routes')(data);
+    const api = require('./api.routes')(data);
     app.use('/api', api);
 
     app.get('*', (req, res) => {

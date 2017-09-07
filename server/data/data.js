@@ -4,9 +4,11 @@ const { ObjectId } = require('mongodb');
 class Data {
     constructor(database) {
         this.users = database.collection('users');
+        this.products = database.collection('products');
+        this.pizza = database.collection('pizza');
     }
 
-    findById(id) {
+    findUserById(id) {
         if (typeof id !== 'string') {
             return Promise.reject('Invalid id!');
         }
@@ -52,6 +54,14 @@ class Data {
 
     getAllUsers() {
         return this.users.find().toArray();
+    }
+
+    getAllPizza() {
+        return this.pizza.find().toArray();
+    }
+
+    getAllProducts() {
+        return this.products.find().toArray();
     }
 }
 
