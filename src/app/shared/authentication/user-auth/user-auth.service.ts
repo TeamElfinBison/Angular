@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
-import { RequesterService } from './../../core/requester/requester.service';
-import { User } from './../../models/User';
+import { RequesterService } from './../../../core/requester/requester.service';
+import { User } from './../../../models/User';
 import { Injectable } from '@angular/core';
 
 @Injectable()

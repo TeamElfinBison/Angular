@@ -1,8 +1,8 @@
 import { UserInfoService } from './../../core/user-info/user-info.service';
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { LoginComponent } from '../../authentication/login/login.component';
-import { RegisterComponent } from '../../authentication/register/register.component';
+import { LoginComponent } from '../authentication/login/login.component';
+import { RegisterComponent } from '../authentication/register/register.component';
 
 
 @Component({
@@ -30,10 +30,10 @@ export class NavbarComponent implements OnInit, DoCheck {
     }
 
     loginModal() {
-    this.dialogService.addDialog(LoginComponent, {title: 'Log in'});
-  }
+        this.dialogService.addDialog(LoginComponent, { title: 'Log in' });
+    }
     registerModal() {
-    this.dialogService.addDialog(RegisterComponent, {title: 'Log in'});
-  }
+        this.dialogService.addDialog(RegisterComponent, { title: 'Log in' });
+    }
 }
 

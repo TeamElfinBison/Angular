@@ -1,13 +1,13 @@
-import { NotificatorService } from './../../core/notificator/notificator.service';
+import { NotificatorService } from './../../../core/notificator/notificator.service';
 import { UserAuthService } from './../user-auth/user-auth.service';
-import { User } from './../../models/User';
+import { User } from './../../../models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from '../../core/cookie/cookie.service';
+import { CookieService } from '../../../core/cookie/cookie.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 
 export interface LoginModal {
-  title: string;
+    title: string;
 }
 
 @Component({
@@ -26,7 +26,8 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
         private readonly notificator: NotificatorService,
         private readonly cookieService: CookieService,
         private readonly router: Router,
-    ) {super(dialogService);
+    ) {
+        super(dialogService);
     }
 
     ngOnInit() {
@@ -43,7 +44,7 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
                 this.close();
             },
             (err) => this.notificator.showError(err.error.message),
-            );
+        );
     }
 }
 

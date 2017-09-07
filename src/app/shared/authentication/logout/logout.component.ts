@@ -1,7 +1,7 @@
-import { CookieService } from '../../core/cookie/cookie.service';
-import { NotificatorService } from './../../core/notificator/notificator.service';
+import { CookieService } from '../../../core/cookie/cookie.service';
+import { NotificatorService } from './../../../core/notificator/notificator.service';
 import { UserAuthService } from './../user-auth/user-auth.service';
-import { User } from './../../models/User';
+import { User } from './../../../models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -21,9 +21,7 @@ export class LogoutComponent implements OnInit {
     ngOnInit() {
         this.userAuth.logoutUser(this.cookieService.getCookie('token'))
             .subscribe((response) => {
-                this.cookieService.removeCookie('token');
-                this.cookieService.removeCookie('username');
-
+                this.cookieService.removeCookie();
                 this.notificator.showSuccess(response['message']);
             },
             (err) => this.notificator.showError(err.error.message),

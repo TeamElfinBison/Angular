@@ -1,5 +1,5 @@
+import { PizzaModule } from './pizza/pizza.module';
 import { UsersModule } from './users/users.module';
-import { AuthenticationModule } from './authentication/authentication.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,19 +15,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { ProductsComponent } from './components/products/products.component';
-import { AddComponent } from './components/products/add/add.component';
-import { CustompizzaComponent } from './components/custompizza/custompizza.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DialogService } from 'ng2-bootstrap-modal';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         NotFoundComponent,
-        ProductsComponent,
-        AddComponent,
-        CustompizzaComponent
     ],
     imports: [
         BrowserModule,
@@ -38,13 +33,14 @@ import { CustompizzaComponent } from './components/custompizza/custompizza.compo
         SharedModule,
         CoreModule,
         FormsModule,
-        AuthenticationModule,
         UsersModule,
         HttpClientModule,
-        NgHttpLoaderModule
+        NgHttpLoaderModule,
+        PizzaModule
     ],
     providers: [
-        CookieService
+        CookieService,
+        DialogService
     ],
     bootstrap: [
         AppComponent

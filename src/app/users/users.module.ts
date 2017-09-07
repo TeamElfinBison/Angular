@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { UsersDataService } from './users-data/users-data.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,7 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     imports: [
-        CommonModule,
+        SharedModule,
         UsersRoutingModule
     ],
     declarations: [
