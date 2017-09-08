@@ -19,7 +19,7 @@ const attachRouter = (data) => {
                 const user = req.user;
 
                 data
-                    .findById(user._id.toString())
+                    .findUserById(user._id.toString())
                     .then((curr) => sendSuccess('Current user!', res, curr))
                     .catch((err) => sendError(err, res));
             })

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { ProfileComponent } from './profile/profile.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
         UsersRoutingModule
     ],
     declarations: [
-        ProfileComponent
+        ProfileComponent,
+        OrdersComponent
     ],
     providers: [
         UsersDataService
