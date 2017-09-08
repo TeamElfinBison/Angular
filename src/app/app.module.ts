@@ -17,12 +17,14 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogService } from 'ng2-bootstrap-modal';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         NotFoundComponent,
+        AboutComponent,
     ],
     imports: [
         BrowserModule,

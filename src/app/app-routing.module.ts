@@ -1,3 +1,4 @@
+import { AboutComponent } from './components/about/about.component';
 import { LogoutComponent } from './shared/authentication/logout/logout.component';
 import { AuthGuardService } from './core/auth-guard/auth-guard.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -8,6 +9,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'about', component: AboutComponent },
     { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService] },
 
     { path: 'users', loadChildren: './users/users.module#UsersModule' },

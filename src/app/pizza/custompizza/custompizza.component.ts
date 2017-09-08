@@ -121,7 +121,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
             // Add selected pizza to cart
             console.log(JSON.stringify(selectedPizza) + ' on price: ' + this.price + '$ Added to cart');
             this.notificator.showSuccess('Custom pizza on price: ' + this.price + '$ Added to cart');
-            this.router.navigate(['/products']);
+            this.router.navigate(['/home']);
         } else {
             console.log('You have to select dought first!');
             this.notificator.showError('You have to select dought first!');

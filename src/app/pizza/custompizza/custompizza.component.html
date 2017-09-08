@@ -194,9 +194,6 @@
                 </div>
             </div>
         </div>
-
-        <button class="btn btn-success" (click)="documentEditForm.ngSubmit.emit()">{{price}}$ Add to cart</button>
-
         <div class="row row-no-padding bottom-border hidden-sm hidden-xs">
             <div class="col-sm-3">
                 <div class="row row-no-padding">
@@ -218,5 +215,7 @@
                 <div class="yellow-line"></div>
             </div>
         </div>
+
+        <button class="btn btn-success col-sm-offset-5 col-sm-2 cart-button" (click)="documentEditForm.ngSubmit.emit()">{{price}}$ Add to cart</button>
     </div>
 </div>
