@@ -45,13 +45,13 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     font-size: 14px;
-    color: #444;
+    color: #f78e21;
     text-transform: uppercase;
     margin-right: 35px;
 }
 
 .main-menu a:hover {
-    color: #f78e21;
+    color: #09F;
 }
 
 .search-box {
