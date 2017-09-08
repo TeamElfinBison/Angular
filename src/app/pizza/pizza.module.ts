@@ -7,11 +7,13 @@ import { CommonModule } from '@angular/common';
 
 import { PizzaRoutingModule } from './pizza-routing.module';
 import { AllPizzaComponent } from './all-pizza/all-pizza.component';
+import { PizzaDetailsComponent } from './pizza-details/pizza-details.component';
 
 @NgModule({
     declarations: [
         CustompizzaComponent,
         AllPizzaComponent,
+        PizzaDetailsComponent,
     ],
     imports: [
         SharedModule,
