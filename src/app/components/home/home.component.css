@@ -1,18 +1,6 @@
-.video-container {
-    position: fixed;
-    background-color: #333;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    left: 0px;
-    top: 0px;
-    z-index: -2;
-}
-
 video {
     position: fixed;
     width: 100%;
-    max-height: 80vh;
     object-fit: cover;
     /* Change position to absolute if you don't want it to take up the whole page */
     left: 0px;
@@ -22,11 +10,10 @@ video {
 
 .container {
     vertical-align: middle;
-    margin-bottom: 10vh;
 }
 
 #heading {
-    margin: 4vw 0 0 0;
+    margin: 3vw 0 0 0;
     justify-content: center;
     align-items: center;
 }
