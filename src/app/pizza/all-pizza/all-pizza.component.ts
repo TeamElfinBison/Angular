@@ -22,7 +22,7 @@ export class AllPizzaComponent implements OnInit {
             (err) => this.notificator.showError(err.error.message));
     }
 
-    pageChanged(pageNumber){
+    pageChanged(pageNumber) {
         this.currentPage = pageNumber;
     }
 }

@@ -32,7 +32,7 @@ const attachRouter = (data) => {
                 .catch((error) => sendError(error, res));
         })
         .post('/logout',
-            passport.authenticate('jwt', { session: false }),
+            // passport.authenticate('jwt', { session: false }),
             (req, res) => {
                 sendSuccess('Logout success!', res);
             })
