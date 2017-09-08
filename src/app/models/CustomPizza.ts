@@ -1,7 +1,7 @@
 import { Product } from './Product';
 
 export class CustomPizza {
-    name: string;
+    price: number;
     dough: Product[];
     sauce: Product[];
     cheese: Product[];

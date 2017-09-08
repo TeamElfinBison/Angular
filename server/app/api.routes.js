@@ -7,24 +7,9 @@ const { sendSuccess, sendError } = require('./responses');
 const attachRouter = (data) => {
     const router = new Router();
     router
-        .get('/users', (req, res) => {
-            data
-                .getAllUsers()
-                .then((users) => sendSuccess('All users!', res, users))
-                .catch((err) => sendError(err, res));
-        })
-        .get('/currentUser',
-            passport.authenticate('jwt', { session: false }),
-            (req, res) => {
-                const user = req.user;
-
-                data
-                    .findById(user._id.toString())
-                    .then((curr) => sendSuccess('Current user!', res, curr))
-                    .catch((err) => sendError(err, res));
-            })
         .post('/register', (req, res) => {
             const user = req.body;
+            user.cart = [];
 
             data
                 .addUser(user)
@@ -58,6 +43,41 @@ const attachRouter = (data) => {
                 })
                 .catch((error) => sendError(error, res));
         })
+        .get('/currentUser',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => sendSuccess('Current user!', res, curr))
+                    .catch((err) => sendError(err, res));
+            })
+        .post('/currentUser',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+                const pizza = req.body;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => {
+                        curr.cart.push(pizza);
+                        return data.updateUser(curr);
+                    })
+                    .then((curr) => sendSuccess('Custom pizza on price: ' + pizza.price + '$ added to cart', res, curr))
+                    .catch((error) => sendError(error, res));
+            })
+        .get('/shoppingCart',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => sendSuccess('Shopping cart!', res, curr.cart))
+                    .catch((error) => sendError(error, res));
+            })
         .get('/products', (req, res) => {
             data
                 .getAllProducts()

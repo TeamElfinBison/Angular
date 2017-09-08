@@ -1,3 +1,4 @@
+import { CookieService } from './../../core/cookie/cookie.service';
 import { PizzaDataService } from './../pizza-data/pizza-data.service';
 import { CustomPizza } from './../../models/CustomPizza';
 import { Component, OnInit } from '@angular/core';
@@ -18,11 +19,13 @@ export interface CustomPizzaModal {
 })
 export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null> implements OnInit, CustomPizzaModal {
     isLoggedUser: boolean;
-    public custompizza: CustomPizza;
-    public price = 0;
+    public custompizza: CustomPizza = new CustomPizza();
+    public selectedPizza: CustomPizza = new CustomPizza();
     title: string;
     constructor(
         private readonly userInfo: UserInfoService,
+        private readonly cookieService: CookieService,
+
         dialogService: DialogService,
         private readonly notificator: NotificatorService,
         private readonly pizzaDataService: PizzaDataService,
@@ -31,7 +34,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
     }
 
     ngOnInit() {
-        this.custompizza = new CustomPizza();
+        this.custompizza.price = 0;
 
         this.pizzaDataService.getProducts()
             .subscribe(response => {
@@ -47,6 +50,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
             },
             (err) => this.notificator.showError(err.error.message));
     }
+
     add(el) {
         const type = el.target.parentElement.parentElement.parentElement.attributes.ngmodelgroup.nodeValue;
         const productId = el.target.attributes.id.nodeValue;
@@ -56,18 +60,17 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
             this.custompizza.dough.forEach(dough => {
                 if (dough.add) {
                     dough.add = false;
-                    this.price = this.price - 2;
+                    this.custompizza.price -= 2;
                 }
-
             });
         }
 
         element.add = el.target.checked;
 
         if (element.add) {
-            this.price = this.price + element.price;
+            this.custompizza.price += element.price;
         } else {
-            this.price = this.price - element.price;
+            this.custompizza.price -= element.price;
         }
     }
 
@@ -80,50 +83,29 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
             return;
         }
 
-        let isDoughSelected = false;
-        const selectedPizza = {
-            dough: {},
-            sauce: [],
-            cheese: [],
-            meat: [],
-            vegetables: [],
-        };
-        this.custompizza.dough.forEach(dough => {
-            if (dough.add) {
-                isDoughSelected = true;
-                selectedPizza.dough = dough;
-            }
-        });
-        this.custompizza.sauce.forEach(sauce => {
-            if (sauce.add) {
-                selectedPizza.sauce.push(sauce);
-            }
-        });
-        this.custompizza.cheese.forEach(cheese => {
-            if (cheese.add) {
-                selectedPizza.cheese.push(cheese);
-            }
-        });
-        this.custompizza.meat.forEach(meat => {
-            if (meat.add) {
-                selectedPizza.meat.push(meat);
-            }
-        });
-        this.custompizza.vegetables.forEach(vegetables => {
-            if (vegetables.add) {
-                selectedPizza.vegetables.push(vegetables);
-            }
-        });
+        this.selectedPizza.price = this.custompizza.price;
+        ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
+            .forEach(type => {
+                this.custompizza[type].forEach(added => {
+                    if (added.add) {
+                        if (!this.selectedPizza[type]) {
+                            this.selectedPizza[type] = [];
+                        }
 
+                        this.selectedPizza[type].push(added);
+                    }
+                });
+            });
 
-        if (isDoughSelected) {
+        if (this.selectedPizza.dough) {
+            const token = this.cookieService.getCookie('token');
 
-            // Add selected pizza to cart
-            console.log(JSON.stringify(selectedPizza) + ' on price: ' + this.price + '$ Added to cart');
-            this.notificator.showSuccess('Custom pizza on price: ' + this.price + '$ Added to cart');
-            this.router.navigate(['/home']);
+            this.pizzaDataService
+                .addPizzaToUserCart(this.selectedPizza, token).subscribe(
+                (response) => this.notificator.showSuccess(response['message']),
+                (err) => this.notificator.showError(err.error.message),
+                () => this.router.navigate(['/home']));
         } else {
-            console.log('You have to select dought first!');
             this.notificator.showError('You have to select dought first!');
         }
     }
@@ -136,6 +118,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
         }
         return null;
     }
+
     loginModal() {
         this.dialogService.addDialog(LoginComponent, { title: 'Log in' });
     }

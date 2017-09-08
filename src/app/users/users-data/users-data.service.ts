@@ -8,12 +8,12 @@ export class UsersDataService {
 
     constructor(private readonly requester: RequesterService) { }
 
-    getAllUsers() {
-        return this.requester.get('/api/users');
-    }
-
     getCurrentUserInfo(token: string) {
         const headers = new HttpHeaders().set('token', token);
         return this.requester.get('/api/currentUser', headers);
+    }
+
+    getShoppingCart() {
+        return this.requester.get('/api/shoppingCart');
     }
 }

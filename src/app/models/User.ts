@@ -1,3 +1,4 @@
+import { CustomPizza } from './CustomPizza';
 import { Pizza } from './Pizza';
 import { Product } from './Product';
 
@@ -6,5 +7,5 @@ export class User {
     firstName: string;
     lastName: string;
     password: string;
-    cart: (Product | Pizza)[];
+    cart: (Pizza | CustomPizza)[];
 }

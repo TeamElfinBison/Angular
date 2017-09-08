@@ -7,7 +7,7 @@ import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 
 
 export interface RegisterModal {
-  title: string;
+    title: string;
 }
 @Component({
     selector: 'app-register',
@@ -16,25 +16,23 @@ export interface RegisterModal {
 })
 
 export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnInit, RegisterModal {
-    public user: User;
+    public user: User = new User();
     title: string;
     constructor(
         dialogService: DialogService,
         private readonly userAuth: UserAuthService,
         private readonly notificator: NotificatorService,
-        private readonly router: Router) {super(dialogService);
+        private readonly router: Router) {
+        super(dialogService);
     }
 
     ngOnInit() {
-        this.user = new User();
     }
 
     registerUser() {
         this.userAuth.registerUser(this.user).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message),
-            () => {
-                this.close();
-            });
+            () => this.close());
     }
 }

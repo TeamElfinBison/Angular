@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { ProfileComponent } from './profile/profile.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
         UsersRoutingModule
     ],
     declarations: [
-        ProfileComponent
+        ProfileComponent,
+        ShoppingCartComponent
     ],
     providers: [
         UsersDataService
