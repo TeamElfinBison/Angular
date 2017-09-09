@@ -1,3 +1,40 @@
-<p>
-  orders works!
-</p>
+<div>
+    <h1 class="text-center">Order history</h1>
+    <hr/>
+    <h3 *ngIf="0 === 0">No orders yet!</h3>
+    <div class="table-responsive" *ngIf="1 > 0">
+      <p>*If your recent order has status "Delivered", but you didn't receive it yet, please contact us!</p>
+      <table class="table table-hover" id="my-orders-table" data-show-toggle="false">
+        <thead>
+          <tr class="warning">
+            <th>Order #</th>
+            <th>Date</th>
+            <th>Deliver to</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr class="TEST">
+                <td class="text-center">{{order.id}}1</td>
+                <td class="text-center">{{order.date | date:'short' }}2</td>
+                <td class="text-center">{{order.address}}3</td>
+                <td class="text-center">{{order.price | currency:'USD':true }}4</td>
+                <td *ngIf="3 === 3"><i class="fa fa-check fa-fw icon" aria-hidden="true"> </i> DELIVERED</td>
+                <td *ngIf="2 === 1"><i class="fa fa-free-code-camp fa-fw icon" aria-hidden="true"> </i> We bake it...</td>
+                <td *ngIf="order.status === 2"><i class="fa fa-bicycle fa-fw icon" aria-hidden="true"> </i> With courier ...</td>
+            </tr>
+            <tr *ngFor="let order of userOrders" >
+                <td class="text-center">{{order.id}}</td>
+                <td class="text-center">{{order.date | date:'short' }}</td>
+                <td class="text-center">{{order.address}}</td>
+                <td class="text-center">{{order.price | currency:'USD':true }}</td>
+
+                <td *ngIf="1 === 1"><span class="glyphicon glyphicon-ok" aria-hidden="false">We bake it!</span></td>
+                <td *ngIf="order.status === 2">With courier ...</td>
+                <td *ngIf="order.status === 3">Delivered</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
