@@ -8,11 +8,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     { path: '', redirectTo: 'profile', pathMatch: 'full' },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
-<<<<<<< HEAD
     { path: 'orders', component: OrdersComponent, canActivate: [AuthGuardService] },
-=======
     { path: 'cart', component: ShoppingCartComponent },
->>>>>>> master
 ];
 
 @NgModule({
