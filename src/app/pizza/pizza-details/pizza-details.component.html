@@ -1,4 +1,4 @@
-<button class="col-md-4 col-sm-6 mix portfolio-item pizza" (click)='orderPizza()'>
+<div class="col-md-4 col-sm-6 mix portfolio-item pizza" (click)='orderPizza()'>
     <div class="portfolio-wrapper">
         <div class="portfolio-thumb">
             <img src={{pizza.imgUrl}} alt="" />
@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="label-text" class='text-center'>
-            <h3><a href="single-post.html">{{pizza.name}}</a></h3>
+            <h3>{{pizza.name}}</h3>
             <span class="text-category">${{pizza.price}}</span>
         </div>
     </div>
-</button>
+</div>
