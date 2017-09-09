@@ -12,4 +12,12 @@ export class UserInfoService {
     getUserUsername(): string {
         return this.cookieService.getCookie('username');
     }
+
+    getUserCartItems(): string {
+        return this.cookieService.getCookie('cartItems');
+    }
+
+    getUserCartPrice(): string {
+        return this.cookieService.getCookie('cartPrice');
+    }
 }

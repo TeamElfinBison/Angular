@@ -9,7 +9,6 @@ const attachRouter = (data) => {
     router
         .post('/register', (req, res) => {
             const user = req.body;
-            user.cart = [];
 
             data
                 .addUser(user)
@@ -29,7 +28,7 @@ const attachRouter = (data) => {
                 .then((expUser) => {
                     return data.validateUserPassword(expUser, user.password);
                 })
-                .then(() => {
+                .then((expUser) => {
                     const jwtObject = {
                         _id: user._id,
                         username: user.username,
@@ -39,7 +38,7 @@ const attachRouter = (data) => {
                         expiresIn: 1440,
                     });
 
-                    sendSuccess('Login success!', res, { token });
+                    sendSuccess('Login success!', res, { token, user: expUser });
                 })
                 .catch((error) => sendError(error, res));
         })
@@ -62,7 +61,8 @@ const attachRouter = (data) => {
                 data
                     .findUserById(user._id.toString())
                     .then((curr) => {
-                        curr.cart.push(pizza);
+                        curr.cart.items.push(pizza);
+                        curr.cart.price += pizza.price;
                         return data.updateUser(curr);
                     })
                     .then((curr) => sendSuccess('Custom pizza on price: ' + pizza.price + '$ added to cart', res, curr))

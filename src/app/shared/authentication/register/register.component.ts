@@ -1,3 +1,4 @@
+import { Cart } from './../../../models/Cart';
 import { NotificatorService } from './../../../core/notificator/notificator.service';
 import { UserAuthService } from './../user-auth/user-auth.service';
 import { User } from './../../../models/User';
@@ -16,7 +17,7 @@ export interface RegisterModal {
 })
 
 export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnInit, RegisterModal {
-    public user: User = new User();
+    public user: User;
     title: string;
     constructor(
         dialogService: DialogService,
@@ -27,6 +28,10 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
     }
 
     ngOnInit() {
+        this.user = new User();
+        this.user.cart = new Cart();
+        this.user.cart.items = [];
+        this.user.cart.price = 0;
     }
 
     registerUser() {

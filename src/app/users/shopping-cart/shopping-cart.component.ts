@@ -1,3 +1,4 @@
+import { CookieService } from './../../core/cookie/cookie.service';
 import { NotificatorService } from './../../core/notificator/notificator.service';
 import { UsersDataService } from './../users-data/users-data.service';
 import { Product } from './../../models/Product';
@@ -16,12 +17,18 @@ export class ShoppingCartComponent implements OnInit {
 
     constructor(
         private readonly userDataService: UsersDataService,
-        private readonly notificator: NotificatorService
+        private readonly notificator: NotificatorService,
+        private readonly cookieService: CookieService
     ) { }
 
     ngOnInit() {
-        this.userDataService.getShoppingCart().subscribe(
-            (response) => this.cart = response['data'][0],
-            (err) => this.cart = []);
+        const token = this.cookieService.getCookie('token');
+
+        this.userDataService.getShoppingCart(token).subscribe(
+            (response) => {
+                this.cart = response['data'][0];
+                console.log(this.cart);
+            },
+            (err) => this.notificator.showError(err.error.message));
     }
 }

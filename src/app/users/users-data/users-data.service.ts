@@ -13,7 +13,8 @@ export class UsersDataService {
         return this.requester.get('/api/currentUser', headers);
     }
 
-    getShoppingCart() {
-        return this.requester.get('/api/shoppingCart');
+    getShoppingCart(token: string) {
+        const headers = new HttpHeaders().set('token', token);
+        return this.requester.get('/api/shoppingCart', headers);
     }
 }

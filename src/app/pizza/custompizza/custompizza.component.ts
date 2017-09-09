@@ -78,7 +78,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
         this.isLoggedUser = this.userInfo.isLoggedUser();
 
         if (!this.isLoggedUser) {
-            this.notificator.showError('You have to be loged!');
+            this.notificator.showError('You have to be logged!');
             this.loginModal();
             return;
         }
@@ -102,7 +102,15 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
 
             this.pizzaDataService
                 .addPizzaToUserCart(this.selectedPizza, token).subscribe(
-                (response) => this.notificator.showSuccess(response['message']),
+                (response) => {
+                    const items = +this.cookieService.getCookie('cartItems');
+                    const price = +this.cookieService.getCookie('cartPrice');
+
+                    this.cookieService.setCookie('cartItems', (items + 1).toString());
+                    this.cookieService.setCookie('cartPrice', (price + this.selectedPizza.price).toString());
+
+                    this.notificator.showSuccess(response['message']);
+                },
                 (err) => this.notificator.showError(err.error.message),
                 () => this.router.navigate(['/home']));
         } else {
