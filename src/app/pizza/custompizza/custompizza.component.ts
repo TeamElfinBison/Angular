@@ -8,29 +8,24 @@ import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { Router } from '@angular/router';
 import { UserInfoService } from '../../core/user-info/user-info.service';
 import { LoginComponent } from '../../shared/authentication/login/login.component';
-export interface CustomPizzaModal {
-    title: string;
-}
 
 @Component({
     selector: 'app-custompizza',
     templateUrl: './custompizza.component.html',
     styleUrls: ['./custompizza.component.css']
 })
-export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null> implements OnInit, CustomPizzaModal {
+export class CustompizzaComponent implements OnInit {
     isLoggedUser: boolean;
     public custompizza: CustomPizza = new CustomPizza();
     public selectedPizza: CustomPizza = new CustomPizza();
-    title: string;
+
     constructor(
         private readonly userInfo: UserInfoService,
         private readonly cookieService: CookieService,
-
-        dialogService: DialogService,
+        private readonly dialogService: DialogService,
         private readonly notificator: NotificatorService,
         private readonly pizzaDataService: PizzaDataService,
         private readonly router: Router) {
-        super(dialogService);
     }
 
     ngOnInit() {
@@ -79,7 +74,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
 
         if (!this.isLoggedUser) {
             this.notificator.showError('You have to be logged!');
-            this.loginModal();
+            this.showLoginModal();
             return;
         }
 
@@ -111,8 +106,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
 
                     this.notificator.showSuccess(response['message']);
                 },
-                (err) => this.notificator.showError(err.error.message),
-                () => this.router.navigate(['/home']));
+                (err) => this.notificator.showError(err.error.message));
         } else {
             this.notificator.showError('You have to select dought first!');
         }
@@ -127,7 +121,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
         return null;
     }
 
-    loginModal() {
+    showLoginModal() {
         this.dialogService.addDialog(LoginComponent, { title: 'Log in' });
     }
 }

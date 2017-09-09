@@ -81,7 +81,7 @@ const attachRouter = (data) => {
                         curr.cart.price += pizza.price;
                         return data.updateUser(curr);
                     })
-                    .then((curr) => sendSuccess('Custom pizza on price: ' + pizza.price + '$ added to cart', res, curr))
+                    .then((curr) => sendSuccess('Pizza "' + pizza.name + '" added to cart', res, curr))
                     .catch((error) => sendError(error, res));
             })
         .get('/shoppingCart',

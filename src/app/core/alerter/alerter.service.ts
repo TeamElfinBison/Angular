@@ -31,12 +31,13 @@ export class AlerterService {
                 showCancelButton: true,
                 showLoaderOnConfirm: true,
                 allowOutsideClick: false,
-            }).then((isConfirm) => {
-                if (isConfirm) {
-                    resolve(id);
-                } else {
-                    reject();
-                }
+                preConfirm: () => {
+                    return new Promise((res) => setTimeout(() => res(), 500));
+                },
+            }).then(() => {
+                resolve(id);
+            }, () => {
+                reject();
             });
         });
     }
