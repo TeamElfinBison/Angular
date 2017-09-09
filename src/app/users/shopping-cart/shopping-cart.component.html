@@ -1,26 +1,47 @@
 <div class="container">
+    <div class="col-md-12">
+        <div class="heading-section">
+            <h2>Your orders</h2>
+            <img src="/assets/images/under-heading.png" alt="">
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-8">
-            <div class="pizza" *ngFor="let pizza of cart.items; let i = index">
-                <div class="pizza-img">
-                    <img src="/assets/images/custom-pizza.png" alt="custom pizza">
+        <ng-container *ngFor="let pizza of cart.customPizza; let i = index">
+            <div class="pizza row">
+                <div class=" col-md-1 pizza-img">
+                    <img class="img-responsive" src="/assets/images/custom-pizza.png" alt="custom pizza">
                 </div>
-                <div class="pizza-description">
+                <div class="col-md-8 pizza-description">
                     <h3>Custom pizza {{i+1}}</h3>
                     <p>({{pizza.dough[0].name}},
                         <span *ngFor="let sauce of pizza.sauce">{{sauce.name}}, </span>
                         <span *ngFor="let cheese of pizza.cheese">{{cheese.name}}, </span>
-                        <span *ngFor="let meat of pizza.meat">{{meat.name}} </span>
-                        <span *ngFor="let veg of pizza.vegetables">{{veg.name}}</span>)
+                        <span *ngFor="let meat of pizza.meat">{{meat.name}}, </span>
+                        <span *ngFor="let veg of pizza.vegetables">{{veg.name}}, </span>)
                     </p>
                 </div>
+                <div class="col-xs-1 remove-btn-container relative">
+                    <span class="middle">{{pizza.price}}$</span>
+                </div>
+                <div class="col-xs-1 remove-btn-container relative">
+                    <button class="btn btn-warning remove-btn middle">Remove</button>
+                </div>
+
+            </div>
+            <hr>
+        </ng-container>
+        <div class="purchase">
+            <div class="col-md-7"></div>
+            <div class="col-md-2 total-text">
+                <h4>All Total:</h4>
+            </div>
+            <div class="col-md-1">
+                <h4>{{cart.price}}$</h4>
+            </div>
+            <div class="col-md-1 purchase-btn-container">
+                <button class="btn btn-success purchase-btn">Purchase</button>
             </div>
         </div>
+
     </div>
 </div>
-
-
-
-
-
-<p>{{cart | json}}</p>
