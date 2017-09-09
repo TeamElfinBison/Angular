@@ -6,13 +6,13 @@
         </div>
     </div>
     <div class="row">
-        <ng-container *ngFor="let pizza of cart.customPizza; let i = index">
+        <ng-container *ngFor="let pizza of cart.customPizza">
             <div class="pizza row">
                 <div class=" col-md-1 pizza-img">
                     <img class="img-responsive" src="/assets/images/custom-pizza.png" alt="custom pizza">
                 </div>
                 <div class="col-md-8 pizza-description">
-                    <h3>Custom pizza {{i+1}}</h3>
+                    <h3>Custom pizza</h3>
                     <p>({{pizza.dough[0].name}},
                         <span *ngFor="let sauce of pizza.sauce">{{sauce.name}}, </span>
                         <span *ngFor="let cheese of pizza.cheese">{{cheese.name}}, </span>
@@ -23,7 +23,7 @@
                 <div class="col-xs-1 remove-btn-container relative">
                     <span class="middle">{{pizza.price}}$</span>
                 </div>
-                <div class="col-xs-1 remove-btn-container relative">
+                <div class="col-xs-1 remove-btn-container relative" (click)='removeCustomPizzaOrder(pizza)'>
                     <button class="btn btn-warning remove-btn middle">Remove</button>
                 </div>
 
