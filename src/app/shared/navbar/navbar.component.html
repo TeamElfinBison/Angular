@@ -7,10 +7,15 @@
                         <a (click)=loginModal()>Log in</a>
                         <a (click)=registerModal()>Register</a>
                     </div>
-                    <div class="home-account" *ngIf="isLoggedUser == true">
-                        <span>Hello </span>
-                        <a [routerLink]="['/users/profile']"> {{loggedUserUsername}}!</a>
-                        <a [routerLink]="['/logout']">Log out</a>
+                    <div class="home-account dropdown" *ngIf="isLoggedUser == true">
+                        <span>Hello</span>
+                        <a>{{loggedUserUsername}}!</a>
+                        <ul class="dropdown-content">
+                            <li><a [routerLink]="['/users/profile']"> Profile</a></li>
+                            <li><a [routerLink]="['/users/orders']"> My orders</a></li>
+                            <li><a [routerLink]="['/logout']">Log out</a></li>
+                        </ul>
+
 
                     </div>
                 </div>
