@@ -1,1 +1,26 @@
-<h1>Cart</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="pizza" *ngFor="let pizza of cart.items; let i = index">
+                <div class="pizza-img">
+                    <img src="/assets/images/custom-pizza.png" alt="custom pizza">
+                </div>
+                <div class="pizza-description">
+                    <h3>Custom pizza {{i+1}}</h3>
+                    <p>({{pizza.dough[0].name}},
+                        <span *ngFor="let sauce of pizza.sauce">{{sauce.name}}, </span>
+                        <span *ngFor="let cheese of pizza.cheese">{{cheese.name}}, </span>
+                        <span *ngFor="let meat of pizza.meat">{{meat.name}} </span>
+                        <span *ngFor="let veg of pizza.vegetables">{{veg.name}}</span>)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<p>{{cart | json}}</p>
