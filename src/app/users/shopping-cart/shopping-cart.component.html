@@ -6,19 +6,37 @@
         </div>
     </div>
     <div class="row">
-        <ng-container *ngFor="let pizza of cart.customPizza; let i = index">
+        <ng-container *ngFor="let customPizza of cart.customPizza; let i = index">
+            <div class="customPizza row">
+                <div class=" col-md-1 customPizza-img">
+                    <img class="img-responsive" src="/assets/images/custom-pizza.png" alt="custom customPizza">
+                </div>
+                <div class="col-md-8 customPizza-description">
+                    <h3>Custom Pizza {{i+1}}</h3>
+                    <p>({{customPizza.dough[0].name}},
+                        <span *ngFor="let sauce of customPizza.sauce">{{sauce.name}}, </span>
+                        <span *ngFor="let cheese of customPizza.cheese">{{cheese.name}}, </span>
+                        <span *ngFor="let meat of customPizza.meat">{{meat.name}}, </span>
+                        <span *ngFor="let veg of customPizza.vegetables">{{veg.name}}, </span>)
+                    </p>
+                </div>
+                <div class="col-xs-1 remove-btn-container relative">
+                    <span class="middle">{{customPizza.price}}$</span>
+                </div>
+                <div class="col-xs-1 remove-btn-container relative">
+                    <button class="btn btn-warning remove-btn middle">Remove</button>
+                </div>
+
+            </div>
+            <hr>
+        </ng-container>
+        <ng-container *ngFor="let pizza of cart.pizza; let i = index">
             <div class="pizza row">
                 <div class=" col-md-1 pizza-img">
-                    <img class="img-responsive" src="/assets/images/custom-pizza.png" alt="custom pizza">
+                    <img class="img-responsive" src="{{pizza.imgUrl}}" alt="Pizza {{pizza.name}}">
                 </div>
                 <div class="col-md-8 pizza-description">
-                    <h3>Custom pizza {{i+1}}</h3>
-                    <p>({{pizza.dough[0].name}},
-                        <span *ngFor="let sauce of pizza.sauce">{{sauce.name}}, </span>
-                        <span *ngFor="let cheese of pizza.cheese">{{cheese.name}}, </span>
-                        <span *ngFor="let meat of pizza.meat">{{meat.name}}, </span>
-                        <span *ngFor="let veg of pizza.vegetables">{{veg.name}}, </span>)
-                    </p>
+                    <h3>{{pizza.name}}</h3>
                 </div>
                 <div class="col-xs-1 remove-btn-container relative">
                     <span class="middle">{{pizza.price}}$</span>
