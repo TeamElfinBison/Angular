@@ -57,6 +57,24 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     removeClassicPizzaOrder(pizza: Pizza) {
-        console.log(event);
+        this.cart.pizza = this.cart.pizza
+            .filter(x => {
+                return Object.keys(pizza).some(key => {
+                    return pizza[key] !== x[key];
+                });
+            });
+
+        const cartItems = +this.cookieService.getCookie('cartItems') - 1;
+        const cartPrice = +this.cookieService.getCookie('cartPrice') - pizza.price;
+
+        this.cookieService.setCookie('cartItems', cartItems.toString());
+        this.cookieService.setCookie('cartPrice', cartPrice.toString());
+
+        // needs refactoring !!
+        const token = this.cookieService.getCookie('token');
+        this.userDataService
+            .deleteClassicPizzaFromCart(pizza.price.toString(), pizza, token).subscribe(
+            (response) => this.notificator.showSuccess(response['message']),
+            (err) => this.notificator.showError(err.error.message));
     }
 }

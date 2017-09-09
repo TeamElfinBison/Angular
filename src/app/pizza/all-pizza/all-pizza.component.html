@@ -22,7 +22,7 @@
         </div>
         <ul id="Container">
             <div class='row'>
-                <li *ngFor='let pz of pizza | paginate: {itemsPerPage: 5, currentPage: currentPage};let i = index'>
+                <li *ngFor='let pz of pizza | paginate: {itemsPerPage: 6, currentPage: currentPage};let i = index'>
                     <div class="clearfix" *ngIf="i % 3 == 0"></div>
                     <app-pizza-details [pizza]=pz></app-pizza-details>
                 </li>

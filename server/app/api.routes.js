@@ -132,15 +132,9 @@ const attachRouter = (data) => {
                 data
                     .findUserById(user._id.toString())
                     .then((curr) => {
-                        curr.cart.customPizza = curr.cart.customPizza
+                        curr.cart.pizza = curr.cart.pizza
                             .filter((x) => {
                                 return Object.keys(pizza).some((key) => {
-                                    if (pizza[key].length) {
-                                        return pizza[key].some((type) => {
-                                            return !!x[key].find((y) => y.toString() !== type.toString());
-                                        });
-                                    }
-
                                     return pizza[key].toString() !== x[key].toString();
                                 });
                             });

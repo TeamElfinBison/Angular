@@ -78,6 +78,18 @@ export class CustompizzaComponent implements OnInit {
             return;
         }
 
+        let isDoughSelected = false;
+        this.custompizza.dough.forEach(element => {
+            if (element.add) {
+                isDoughSelected = true;
+            }
+        });
+
+        if (!isDoughSelected) {
+            this.notificator.showError('You have to select dought first!');
+            return;
+        }
+
         this.selectedPizza.price = this.custompizza.price;
         ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
             .forEach(type => {
@@ -92,24 +104,20 @@ export class CustompizzaComponent implements OnInit {
                 });
             });
 
-        if (this.selectedPizza.dough) {
-            const token = this.cookieService.getCookie('token');
+        const token = this.cookieService.getCookie('token');
 
-            this.pizzaDataService
-                .addCustomPizzaToUserCart(this.selectedPizza, token).subscribe(
-                (response) => {
-                    const items = +this.cookieService.getCookie('cartItems');
-                    const price = +this.cookieService.getCookie('cartPrice');
+        this.pizzaDataService
+            .addCustomPizzaToUserCart(this.selectedPizza, token).subscribe(
+            (response) => {
+                const items = +this.cookieService.getCookie('cartItems');
+                const price = +this.cookieService.getCookie('cartPrice');
 
-                    this.cookieService.setCookie('cartItems', (items + 1).toString());
-                    this.cookieService.setCookie('cartPrice', (price + this.selectedPizza.price).toString());
+                this.cookieService.setCookie('cartItems', (items + 1).toString());
+                this.cookieService.setCookie('cartPrice', (price + this.selectedPizza.price).toString());
 
-                    this.notificator.showSuccess(response['message']);
-                },
-                (err) => this.notificator.showError(err.error.message));
-        } else {
-            this.notificator.showError('You have to select dought first!');
-        }
+                this.notificator.showSuccess(response['message']);
+            },
+            (err) => this.notificator.showError(err.error.message));
     }
 
     findObjectByKey(array, key, value) {
