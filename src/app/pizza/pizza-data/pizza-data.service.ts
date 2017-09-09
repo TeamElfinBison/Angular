@@ -16,8 +16,13 @@ export class PizzaDataService {
         return this.requester.get('/api/products');
     }
 
-    addPizzaToUserCart(pizza: (CustomPizza | Pizza), token: string) {
+    addPizzaToUserCart(pizza: Pizza, token: string) {
         const headers = new HttpHeaders().set('token', token);
-        return this.requester.post('/api/currentUser', pizza, headers);
+        return this.requester.put('/api/shoppingCart', pizza, headers);
+    }
+
+    addCustomPizzaToUserCart(pizza: CustomPizza, token: string) {
+        const headers = new HttpHeaders().set('token', token);
+        return this.requester.post('/api/shoppingCart', pizza, headers);
     }
 }

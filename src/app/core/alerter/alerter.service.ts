@@ -26,10 +26,11 @@ export class AlerterService {
                 text: `Do you want to order ${name}?`,
                 imageUrl,
                 confirmButtonColor: '#40A104',
-                confirmButtonText: 'Yes, i want it!',
+                confirmButtonText: 'Yes, order it!',
                 cancelButtonText: 'Cancel',
                 showCancelButton: true,
                 showLoaderOnConfirm: true,
+                allowOutsideClick: false,
             }).then((isConfirm) => {
                 if (isConfirm) {
                     resolve(id);

@@ -37,10 +37,13 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
     loginUser() {
         this.userAuth.loginUser(this.user).subscribe(
             (response) => {
+                const user = response['data'][0].user;
+                const cartItems = user.cart.pizza.length + user.cart.customPizza.length;
+
                 this.cookieService.setCookie('token', response['data'][0].token);
-                this.cookieService.setCookie('username', response['data'][0].user.username);
-                this.cookieService.setCookie('cartItems', response['data'][0].user.cart.items.length.toString());
-                this.cookieService.setCookie('cartPrice', response['data'][0].user.cart.price.toString());
+                this.cookieService.setCookie('username', user.username);
+                this.cookieService.setCookie('cartItems', cartItems.toString());
+                this.cookieService.setCookie('cartPrice', user.cart.price.toString());
 
                 this.notificator.showSuccess(response['message']);
                 this.close();

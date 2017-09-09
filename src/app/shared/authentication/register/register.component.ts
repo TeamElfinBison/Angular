@@ -30,7 +30,8 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
     ngOnInit() {
         this.user = new User();
         this.user.cart = new Cart();
-        this.user.cart.items = [];
+        this.user.cart.pizza = [];
+        this.user.cart.customPizza = [];
         this.user.cart.price = 0;
     }
 

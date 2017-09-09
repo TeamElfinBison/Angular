@@ -52,7 +52,23 @@ const attachRouter = (data) => {
                     .then((curr) => sendSuccess('Current user!', res, curr))
                     .catch((err) => sendError(err, res));
             })
-        .post('/currentUser',
+        .post('/shoppingCart',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+                const customPizza = req.body;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => {
+                        curr.cart.customPizza.push(customPizza);
+                        curr.cart.price += customPizza.price;
+                        return data.updateUser(curr);
+                    })
+                    .then((curr) => sendSuccess('Custom pizza on price: ' + customPizza.price + '$ added to cart', res, curr))
+                    .catch((error) => sendError(error, res));
+            })
+        .put('/shoppingCart',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {
                 const user = req.user;
@@ -61,7 +77,7 @@ const attachRouter = (data) => {
                 data
                     .findUserById(user._id.toString())
                     .then((curr) => {
-                        curr.cart.items.push(pizza);
+                        curr.cart.pizza.push(pizza);
                         curr.cart.price += pizza.price;
                         return data.updateUser(curr);
                     })

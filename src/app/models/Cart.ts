@@ -2,6 +2,7 @@ import { CustomPizza } from './CustomPizza';
 import { Pizza } from './Pizza';
 
 export class Cart {
-    items: (Pizza | CustomPizza)[];
+    pizza: Pizza[];
+    customPizza: CustomPizza[];
     price: number;
 }
