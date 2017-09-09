@@ -101,7 +101,7 @@ export class CustompizzaComponent extends DialogComponent<CustomPizzaModal, null
             const token = this.cookieService.getCookie('token');
 
             this.pizzaDataService
-                .addPizzaToUserCart(this.selectedPizza, token).subscribe(
+                .addCustomPizzaToUserCart(this.selectedPizza, token).subscribe(
                 (response) => {
                     const items = +this.cookieService.getCookie('cartItems');
                     const price = +this.cookieService.getCookie('cartPrice');
