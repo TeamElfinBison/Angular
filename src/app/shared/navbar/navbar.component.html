@@ -7,17 +7,22 @@
                         <a (click)=loginModal()>Log in</a>
                         <a (click)=registerModal()>Register</a>
                     </div>
-                    <div class="home-account" *ngIf="isLoggedUser == true">
-                        <span>Hello </span>
-                        <a [routerLink]="['/users/profile']"> {{loggedUserUsername}}!</a>
-                        <a [routerLink]="['/logout']">Log out</a>
+                    <div class="home-account dropdown" *ngIf="isLoggedUser == true">
+                        <span>Hello</span>
+                        <a>{{loggedUserUsername}}!</a>
+                        <ul class="dropdown-content">
+                            <li><a [routerLink]="['/users/profile']"> Profile</a></li>
+                            <li><a [routerLink]="['/users/orders']"> My orders</a></li>
+                            <li><a [routerLink]="['/logout']">Log out</a></li>
+                        </ul>
+
 
                     </div>
                 </div>
                 <div class="col-md-6" *ngIf="isLoggedUser == true">
                     <div class="cart-info">
                         <i class="fa fa-shopping-cart"></i> (
-                        <a [routerLink]="['/cart']">{{cartitems || '0'}} items </a>) in your cart (<a [routerLink]="['/cart']"> {{cartbill || '0'}} $ </a>)
+                        <a [routerLink]="['/users/cart']">{{userCartItems}} items </a>) in your cart (<a [routerLink]="['/users/cart']"> {{userCartPrice}} $ </a>)
                     </div>
                 </div>
             </div>
@@ -35,8 +40,8 @@
                     <div class="main-menu">
                         <ul>
                             <li><a [routerLink]="['/home']">Home</a></li>
-                            <li><a [routerLink]="['/about']">About</a></li>
-                            <li><a [routerLink]="['/pizza/all']">Pizza</a></li>
+                            <!-- <li><a [routerLink]="['/about']">About</a></li> -->
+                            <li><a [routerLink]="['/pizza/all']">Classic Pizza</a></li>
                             <li><a [routerLink]="['/pizza/custompizza']">Build your own pizza!</a></li>
                         </ul>
                     </div>
@@ -45,7 +50,7 @@
         </div>
     </div>
 </header>
-<div id="heading">
+<!-- <div id="heading">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -56,4 +61,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

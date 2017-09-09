@@ -1,3 +1,4 @@
+import { Cart } from './../../../models/Cart';
 import { NotificatorService } from './../../../core/notificator/notificator.service';
 import { UserAuthService } from './../user-auth/user-auth.service';
 import { User } from './../../../models/User';
@@ -7,7 +8,7 @@ import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 
 
 export interface RegisterModal {
-  title: string;
+    title: string;
 }
 @Component({
     selector: 'app-register',
@@ -22,19 +23,22 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
         dialogService: DialogService,
         private readonly userAuth: UserAuthService,
         private readonly notificator: NotificatorService,
-        private readonly router: Router) {super(dialogService);
+        private readonly router: Router) {
+        super(dialogService);
     }
 
     ngOnInit() {
         this.user = new User();
+        this.user.cart = new Cart();
+        this.user.cart.pizza = [];
+        this.user.cart.customPizza = [];
+        this.user.cart.price = 0;
     }
 
     registerUser() {
         this.userAuth.registerUser(this.user).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message),
-            () => {
-                this.close();
-            });
+            () => this.close());
     }
 }

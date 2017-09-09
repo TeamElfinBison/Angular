@@ -26,7 +26,7 @@ class Data {
     }
 
     validateUserPassword(user, password) {
-        if (user === null) {
+        if (!user) {
             return Promise.reject('Invalid user!');
         }
 
@@ -39,6 +39,10 @@ class Data {
     }
 
     addUser(user) {
+        if (!user) {
+            return Promise.reject('Invalid user!');
+        }
+
         return this.findUserByUsername(user.username)
             .then((currUser) => {
                 if (currUser !== null) {
@@ -52,8 +56,14 @@ class Data {
             });
     }
 
-    getAllUsers() {
-        return this.users.find().toArray();
+    updateUser(user) {
+        if (!user) {
+            return Promise.reject('Invalid user!');
+        }
+
+        return this.users.update({
+            _id: user._id,
+        }, user);
     }
 
     getAllPizza() {

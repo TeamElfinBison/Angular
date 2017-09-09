@@ -13,6 +13,8 @@ import { RegisterComponent } from '../authentication/register/register.component
 export class NavbarComponent implements OnInit, DoCheck {
     public isLoggedUser: boolean;
     public loggedUserUsername: string;
+    public userCartItems: number;
+    public userCartPrice: number;
     confirmResult: boolean = null;
     promptMessage: string;
 
@@ -22,11 +24,15 @@ export class NavbarComponent implements OnInit, DoCheck {
     ngOnInit() {
         this.isLoggedUser = this.userInfo.isLoggedUser();
         this.loggedUserUsername = this.userInfo.getUserUsername();
+        this.userCartItems = +this.userInfo.getUserCartItems();
+        this.userCartPrice = +this.userInfo.getUserCartPrice();
     }
 
     ngDoCheck() {
         this.isLoggedUser = this.userInfo.isLoggedUser();
         this.loggedUserUsername = this.userInfo.getUserUsername();
+        this.userCartItems = +this.userInfo.getUserCartItems();
+        this.userCartPrice = +this.userInfo.getUserCartPrice();
     }
 
     loginModal() {

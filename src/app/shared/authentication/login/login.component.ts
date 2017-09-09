@@ -1,3 +1,4 @@
+import { Cart } from './../../../models/Cart';
 import { NotificatorService } from './../../../core/notificator/notificator.service';
 import { UserAuthService } from './../user-auth/user-auth.service';
 import { User } from './../../../models/User';
@@ -17,7 +18,7 @@ export interface LoginModal {
 })
 export class LoginComponent extends DialogComponent<LoginModal, null> implements OnInit, LoginModal {
 
-    public user: User;
+    public user: User = new User();
     public title: string;
 
     constructor(
@@ -31,14 +32,18 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
     }
 
     ngOnInit() {
-        this.user = new User();
     }
 
     loginUser() {
         this.userAuth.loginUser(this.user).subscribe(
             (response) => {
+                const user = response['data'][0].user;
+                const cartItems = user.cart.pizza.length + user.cart.customPizza.length;
+
                 this.cookieService.setCookie('token', response['data'][0].token);
-                this.cookieService.setCookie('username', this.user.username);
+                this.cookieService.setCookie('username', user.username);
+                this.cookieService.setCookie('cartItems', cartItems.toString());
+                this.cookieService.setCookie('cartPrice', user.cart.price.toString());
 
                 this.notificator.showSuccess(response['message']);
                 this.close();
