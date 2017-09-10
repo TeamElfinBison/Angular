@@ -41,4 +41,8 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
             (err) => this.notificator.showError(err.error.message),
             () => this.close());
     }
+
+    create(data: User) {
+        console.log(data);
+    }
 }
