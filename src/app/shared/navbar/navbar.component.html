@@ -22,7 +22,7 @@
                 <div class="col-md-6" *ngIf="isLoggedUser == true">
                     <div class="cart-info">
                         <i class="fa fa-shopping-cart"></i> (
-                        <a [routerLink]="['/users/cart']">{{userCartItems}} items </a>) in your cart (<a [routerLink]="['/users/cart']"> {{userCartPrice}} $ </a>)
+                        <a [routerLink]="['/users/cart']">{{userCartItems}} items </a>) in your cart (<a [routerLink]="['/users/cart']"> {{userCartPrice | currency:'USD':true }} </a>)
                     </div>
                 </div>
             </div>

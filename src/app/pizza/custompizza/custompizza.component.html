@@ -17,7 +17,6 @@
                                 <i class="fa bold">1</i>
                             </div>
                             <h4>Select a Dough</h4>
-                            <p>Sed egestas tincidunt mollis. Aenean a sem leoneski.</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
@@ -26,7 +25,6 @@
                                 <i class="fa bold">2</i>
                             </div>
                             <h4>Select addjectives</h4>
-                            <p>Sed egestas tincidunt mollis. Suspendisse rhoncus vitae enim et faucibus. </p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
@@ -35,7 +33,6 @@
                                 <i class="fa bold">3</i>
                             </div>
                             <h4>Check an order</h4>
-                            <p> Suspendisse rhoncus vitae enim et faucibus. Ut dignissim nec arcu nec hendrerit.</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
@@ -44,7 +41,6 @@
                                 <i class="fa bold">4</i>
                             </div>
                             <h4>Add to Cart</h4>
-                            <p>Ut dignissim nec arcu nec hendrerit. Aenean a sem leoneski. Sed arcu sagittis vel diam in. </p>
                         </div>
                     </div>
                 </div>
@@ -216,6 +212,6 @@
             </div>
         </div>
 
-        <button class="btn btn-success col-sm-offset-5 col-sm-2 cart-button" (click)="documentEditForm.ngSubmit.emit()">{{custompizza.price}}$ Add to cart</button>
+        <button class="btn btn-success col-sm-offset-5 col-sm-2 cart-button" (click)="documentEditForm.ngSubmit.emit()">{{custompizza.price | currency:'USD':true }} Add to cart</button>
     </div>
 </div>

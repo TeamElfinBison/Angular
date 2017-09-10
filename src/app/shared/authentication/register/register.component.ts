@@ -17,7 +17,6 @@ export interface RegisterModal {
 })
 
 export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnInit, RegisterModal {
-    public user: User;
     title: string;
     constructor(
         dialogService: DialogService,
@@ -28,18 +27,16 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
     }
 
     ngOnInit() {
-        this.user = new User();
-
-        this.user.cart = new Cart();
-        this.user.cart.pizza = [];
-        this.user.cart.customPizza = [];
-        this.user.cart.price = 0;
-
-        this.user.orders = [];
     }
 
-    registerUser() {
-        this.userAuth.registerUser(this.user).subscribe(
+    registerUser(data: User) {
+        data.cart = new Cart();
+        data.cart.pizza = [];
+        data.cart.customPizza = [];
+        data.cart.price = 0;
+
+        data.orders = [];
+        this.userAuth.registerUser(data).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message),
             () => this.close());

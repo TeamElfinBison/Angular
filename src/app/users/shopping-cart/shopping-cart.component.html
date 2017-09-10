@@ -21,7 +21,7 @@
                     </p>
                 </div>
                 <div class="col-xs-1 remove-btn-container relative">
-                    <span class="middle">{{customPizza.price}}$</span>
+                    <span class="middle">{{customPizza.price | currency:'USD':true }}</span>
                 </div>
                 <div class="col-xs-1 remove-btn-container relative" (click)='removeCustomPizzaOrder(customPizza)'>
                     <button class="btn btn-warning remove-btn middle">Remove</button>
@@ -39,7 +39,7 @@
                     <h3>{{pizza.name}}</h3>
                 </div>
                 <div class="col-xs-1 remove-btn-container relative">
-                    <span class="middle">{{pizza.price}}$</span>
+                    <span class="middle">{{pizza.price | currency:'USD':true }}</span>
                 </div>
                 <div class="col-xs-1 remove-btn-container relative" (click)='removeClassicPizzaOrder(pizza)'>
                     <button class="btn btn-warning remove-btn middle">Remove</button>
@@ -54,7 +54,7 @@
                 <h4>All Total:</h4>
             </div>
             <div class="col-md-1">
-                <h4>{{cart.price}}$</h4>
+                <h4>{{cart.price | currency:'USD':true }}</h4>
             </div>
             <div class="col-md-1 purchase-btn-container" (click)='orderPizza()'>
                 <button class="btn btn-success purchase-btn">Purchase</button>

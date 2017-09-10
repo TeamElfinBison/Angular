@@ -41,4 +41,11 @@ export class UsersDataService {
 
         return this.requester.post('/api/currentUser', order, headers);
     }
+
+    getUserOrders() {
+        const token = this.cookieService.getCookie('token');
+        const headers = new HttpHeaders().set('token', token);
+
+        return this.requester.get('/api/orders', headers);
+    }
 }

@@ -211,7 +211,18 @@ const attachRouter = (data) => {
                 .getAllPizza()
                 .then((pizza) => sendSuccess('All pizza!', res, pizza))
                 .catch((error) => sendError(error, res));
-        });
+        })
+        .get('/orders',
+        passport.authenticate('jwt', { session: false }),
+        (req, res) => {
+            const user = req.user;
+
+            data
+                .findUserById(user._id.toString())
+                .then((curr) => sendSuccess('User orders!', res, curr.orders))
+                .catch((error) => sendError(error, res));
+        })
+;
 
     return router;
 };
