@@ -62,7 +62,7 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
         // needs refactoring !!
         const token = this.cookieService.getCookie('token');
         this.userDataService
-            .deleteCustomPizzaFromCart(pizza.price.toString(), pizza, token).subscribe(
+            .deleteCustomPizzaFromCart(pizza, token).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message));
     }
@@ -84,7 +84,7 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
         // needs refactoring !!
         const token = this.cookieService.getCookie('token');
         this.userDataService
-            .deleteClassicPizzaFromCart(pizza.price.toString(), pizza, token).subscribe(
+            .deleteClassicPizzaFromCart(pizza, token).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message));
     }

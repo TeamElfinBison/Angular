@@ -16,14 +16,14 @@ export class UsersDataService {
         return this.requester.get('/api/currentUser', headers);
     }
 
-    deleteCustomPizzaFromCart(pizzaId: string, pizza: CustomPizza, token: string) {
+    deleteCustomPizzaFromCart(pizza: CustomPizza, token: string) {
         const headers = new HttpHeaders().set('token', token);
-        return this.requester.post('/api/shoppingCart/' + pizzaId, pizza, headers);
+        return this.requester.put('/api/shoppingCart/customPizza', pizza, headers);
     }
 
-    deleteClassicPizzaFromCart(pizzaId: string, pizza: Pizza, token: string) {
+    deleteClassicPizzaFromCart(pizza: Pizza, token: string) {
         const headers = new HttpHeaders().set('token', token);
-        return this.requester.put('/api/shoppingCart/' + pizzaId, pizza, headers);
+        return this.requester.put('/api/shoppingCart/pizza', pizza, headers);
     }
 
     addOrderToUser(order: Order, token: string) {

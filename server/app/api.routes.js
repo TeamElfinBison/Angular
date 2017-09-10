@@ -38,7 +38,10 @@ const attachRouter = (data) => {
                         expiresIn: 1440,
                     });
 
-                    sendSuccess('Login success!', res, { token, user: expUser });
+                    sendSuccess('Login success!', res, {
+                        token,
+                        user: expUser,
+                    });
                 })
                 .catch((error) => sendError(error, res));
         })
@@ -62,16 +65,23 @@ const attachRouter = (data) => {
                     .findUserById(user._id.toString())
                     .then((curr) => {
                         curr.orders.push(order);
+
                         curr.cart.pizza = [];
                         curr.cart.customPizza = [];
                         curr.cart.price = 0;
 
                         return data.updateUser(curr);
                     })
-                    .then((curr) => sendSuccess('The order is coming in your way!', res, order))
+                    .then((curr) => {
+                        sendSuccess(
+                            'The order is coming in your way!',
+                            res,
+                            order,
+                        );
+                    })
                     .catch((error) => sendError(error, res));
             })
-        .post('/shoppingCart',
+        .post('/shoppingCart/customPizza',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {
                 const user = req.user;
@@ -84,26 +94,18 @@ const attachRouter = (data) => {
                         curr.cart.price += customPizza.price;
                         return data.updateUser(curr);
                     })
-                    .then((curr) => sendSuccess('Custom pizza on price: ' + customPizza.price + '$ added to cart', res, curr))
-                    .catch((error) => sendError(error, res));
-            })
-        .put('/shoppingCart',
-            passport.authenticate('jwt', { session: false }),
-            (req, res) => {
-                const user = req.user;
-                const pizza = req.body;
-
-                data
-                    .findUserById(user._id.toString())
                     .then((curr) => {
-                        curr.cart.pizza.push(pizza);
-                        curr.cart.price += pizza.price;
-                        return data.updateUser(curr);
+                        sendSuccess(
+                            'Custom pizza on price: ' +
+                            customPizza.price +
+                            '$ added to cart',
+                            res,
+                            curr,
+                        );
                     })
-                    .then((curr) => sendSuccess('Pizza "' + pizza.name + '" added to cart', res, curr))
                     .catch((error) => sendError(error, res));
             })
-        .post('/shoppingCart/:id',
+        .put('/shoppingCart/customPizza',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {
                 const user = req.user;
@@ -117,22 +119,56 @@ const attachRouter = (data) => {
                                 return Object.keys(pizza).some((key) => {
                                     if (pizza[key].length) {
                                         return pizza[key].some((type) => {
-                                            return !!x[key].find((y) => y.toString() !== type.toString());
+                                            return !!x[key]
+                                                .find((y) => {
+                                                    return y.toString() !==
+                                                        type.toString();
+                                                });
                                         });
                                     }
 
-                                    return pizza[key].toString() !== x[key].toString();
+                                    return pizza[key].toString() !==
+                                        x[key].toString();
                                 });
                             });
 
                         curr.cart.price -= pizza.price;
                         return data.updateUser(curr);
                     })
-                    .then((curr) => sendSuccess('Custom pizza removed from cart', res, curr))
+                    .then((curr) => {
+                        sendSuccess(
+                            'Custom pizza removed from cart',
+                            res,
+                            curr,
+                        );
+                    })
                     .catch((error) => sendError(error, res));
-            }
-        )
-        .put('/shoppingCart/:id',
+            })
+        .post('/shoppingCart/pizza',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+                const pizza = req.body;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => {
+                        curr.cart.pizza.push(pizza);
+                        curr.cart.price += pizza.price;
+                        return data.updateUser(curr);
+                    })
+                    .then((curr) => {
+                        sendSuccess(
+                            'Pizza "' +
+                            pizza.name +
+                            '" added to cart',
+                            res,
+                            curr,
+                        );
+                    })
+                    .catch((error) => sendError(error, res));
+            })
+        .put('/shoppingCart/pizza',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {
                 const user = req.user;
@@ -144,14 +180,23 @@ const attachRouter = (data) => {
                         curr.cart.pizza = curr.cart.pizza
                             .filter((x) => {
                                 return Object.keys(pizza).some((key) => {
-                                    return pizza[key].toString() !== x[key].toString();
+                                    return pizza[key].toString() !==
+                                        x[key].toString();
                                 });
                             });
 
                         curr.cart.price -= pizza.price;
                         return data.updateUser(curr);
                     })
-                    .then((curr) => sendSuccess('Pizza "' + pizza.name + '" removed from cart', res, curr))
+                    .then((curr) => {
+                        sendSuccess(
+                            'Pizza "' +
+                            pizza.name +
+                            '" removed from cart',
+                            res,
+                            curr,
+                        );
+                    })
                     .catch((error) => sendError(error, res));
             }
         )
