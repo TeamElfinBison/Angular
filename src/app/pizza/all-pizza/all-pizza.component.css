@@ -2,7 +2,6 @@
 
 #product-heading {
     text-align: center;
-    padding: 100px 0 30px 0;
 }
 
 #product-heading h2 {
@@ -11,10 +10,6 @@
     color: #333;
     font-weight: 700;
     text-transform: uppercase;
-}
-
-#Container {
-    margin-top: 80px;
 }
 
 #filters {
