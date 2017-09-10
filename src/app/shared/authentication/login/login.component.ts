@@ -22,7 +22,7 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
 
     public user: User = new User();
     public title: string;
-    public subscription: Subscription;
+    public subscription: Subscription = new Subscription();
 
     constructor(
         dialogService: DialogService,

@@ -18,7 +18,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 export class PizzaDetailsComponent implements OnDestroy {
     @Input()
     public pizza = new Pizza();
-    public subscription: Subscription;
+    public subscription: Subscription = new Subscription();
 
     constructor(
         private readonly alerter: AlerterService,

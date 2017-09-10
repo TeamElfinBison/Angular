@@ -1,3 +1,5 @@
+import { CustompizzaResolverService } from './custompizza-resolver/custompizza-resolver.service';
+import { PizzaResolverService } from './pizza-resolver/pizza-resolver.service';
 import { PizzaDataService } from './pizza-data/pizza-data.service';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
@@ -25,7 +27,9 @@ import { HighlightPizzaDirective } from './highlight-pizza/highlight-pizza.direc
         FormsModule,
     ],
     providers: [
-        PizzaDataService
+        PizzaDataService,
+        PizzaResolverService,
+        CustompizzaResolverService
     ]
 })
 export class PizzaModule { }

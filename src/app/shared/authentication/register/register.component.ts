@@ -20,7 +20,7 @@ export interface RegisterModal {
 
 export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnDestroy, RegisterModal {
     public title: string;
-    public subscription: Subscription;
+    public subscription: Subscription = new Subscription();
 
     constructor(
         dialogService: DialogService,

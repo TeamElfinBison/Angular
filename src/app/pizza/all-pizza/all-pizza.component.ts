@@ -3,30 +3,26 @@ import { Pizza } from './../../models/Pizza';
 import { NotificatorService } from './../../core/notificator/notificator.service';
 import { PizzaDataService } from './../pizza-data/pizza-data.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-all-pizza',
     templateUrl: './all-pizza.component.html',
     styleUrls: ['./all-pizza.component.css']
 })
-export class AllPizzaComponent implements OnInit, OnDestroy {
+export class AllPizzaComponent implements OnInit {
     public pizza: Pizza[];
-    public subscription: Subscription;
     public currentPage = 1;
     public filter = 'all';
 
     constructor(
         private readonly pizzaDataService: PizzaDataService,
-        private readonly notificator: NotificatorService) { }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
+        private readonly notificator: NotificatorService,
+        private readonly activatedRoute: ActivatedRoute
+    ) { }
 
     ngOnInit() {
-        this.subscription = this.pizzaDataService.getAllPizza()
-            .subscribe(response => this.pizza = response['data'][0],
-            (err) => this.notificator.showError(err.error.message));
+        this.pizza = this.activatedRoute.snapshot.data['pizza']['data'][0];
     }
 
     pageChanged(pageNumber) {

@@ -308,6 +308,54 @@ const pizza = [{
         'price': 4.7,
         'type': 'meat'
     },
+    {
+        'name': 'Italian',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1355medium.png',
+        'price': 4.3,
+        'type': 'vegeterian'
+    },
+    {
+        'name': 'Formagi',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1312medium.png',
+        'price': 3.3,
+        'type': 'vegeterian'
+    },
+    {
+        'name': 'Garden Classic',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1295medium.png',
+        'price': 2.8,
+        'type': 'vegeterian'
+    },
+    {
+        'name': 'Alfredo',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1352medium.png',
+        'price': 1.3,
+        'type': 'meat'
+    },
+    {
+        'name': 'New York',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1300medium.png',
+        'price': 1.8,
+        'type': 'meat'
+    },
+    {
+        'name': 'Unica',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1362medium.png',
+        'price': 2.3,
+        'type': 'meat'
+    },
+    {
+        'name': 'Vegeterian Special',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1315medium.png',
+        'price': 3.7,
+        'type': 'vegeterian'
+    },
+    {
+        'name': 'Chickenita',
+        'imgUrl': 'http://www.dominos.bg/gallery/fmobile/1341medium.png',
+        'price': 2.6,
+        'type': 'meat'
+    },
 ];
 
 const path = require('path');

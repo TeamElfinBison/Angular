@@ -29,5 +29,4 @@ export class ProfileComponent implements OnInit, OnDestroy {
             .subscribe(response => this.currentUser = response['data'][0],
             (err) => this.notificator.showError(err.error.message));
     }
-
 }
