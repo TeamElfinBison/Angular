@@ -7,10 +7,12 @@ import { UsersRoutingModule } from './users-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
         SharedModule,
+        RouterModule,
         UsersRoutingModule
     ],
     declarations: [
