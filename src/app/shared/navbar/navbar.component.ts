@@ -15,8 +15,8 @@ export class NavbarComponent implements OnInit, DoCheck {
     public loggedUserUsername: string;
     public userCartItems: number;
     public userCartPrice: number;
-    confirmResult: boolean = null;
-    promptMessage: string;
+    public confirmResult: boolean;
+    public promptMessage: string;
 
     constructor(private readonly userInfo: UserInfoService,
         private dialogService: DialogService) { }

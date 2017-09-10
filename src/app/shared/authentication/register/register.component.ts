@@ -1,8 +1,9 @@
+import { Subscription } from 'rxjs/Subscription';
 import { Cart } from './../../../models/Cart';
 import { NotificatorService } from './../../../core/notificator/notificator.service';
 import { UserAuthService } from './../user-auth/user-auth.service';
 import { User } from './../../../models/User';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { LoginComponent } from '../login/login.component';
@@ -17,8 +18,10 @@ export interface RegisterModal {
     styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnInit, RegisterModal {
-    title: string;
+export class RegisterComponent extends DialogComponent<RegisterModal, null> implements OnDestroy, RegisterModal {
+    public title: string;
+    public subscription: Subscription;
+
     constructor(
         dialogService: DialogService,
         private readonly userAuth: UserAuthService,
@@ -27,7 +30,8 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
         super(dialogService);
     }
 
-    ngOnInit() {
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     registerUser(data: User) {
@@ -35,9 +39,9 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
         data.cart.pizza = [];
         data.cart.customPizza = [];
         data.cart.price = 0;
-
         data.orders = [];
-        this.userAuth.registerUser(data).subscribe(
+
+        this.subscription = this.userAuth.registerUser(data).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message),
             () => this.close());

@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs/Subscription';
 import { CookieService } from './../../core/cookie/cookie.service';
 import { PizzaDataService } from './../pizza-data/pizza-data.service';
 import { CustomPizza } from './../../models/CustomPizza';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Pizza } from '../../models/Pizza';
 import { NotificatorService } from '../../core/notificator/notificator.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
@@ -14,8 +15,9 @@ import { LoginComponent } from '../../shared/authentication/login/login.componen
     templateUrl: './custompizza.component.html',
     styleUrls: ['./custompizza.component.css']
 })
-export class CustompizzaComponent implements OnInit {
-    isLoggedUser: boolean;
+export class CustompizzaComponent implements OnInit, OnDestroy {
+    public isLoggedUser: boolean;
+    public subscriptions: Subscription[] = [];
     public custompizza: CustomPizza = new CustomPizza();
     public selectedPizza: CustomPizza = new CustomPizza();
 
@@ -28,22 +30,26 @@ export class CustompizzaComponent implements OnInit {
         private readonly router: Router) {
     }
 
+    ngOnDestroy() {
+        this.subscriptions.forEach(x => x.unsubscribe());
+    }
+
     ngOnInit() {
         this.custompizza.price = 0;
 
-        this.pizzaDataService.getProducts()
-            .subscribe(response => {
-                response['data'][0]
-                    .forEach(product => {
-                        ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
-                            .forEach(type => {
-                                if (product[type]) {
-                                    this.custompizza[type] = product[type];
-                                }
-                            });
+        const sub = this.pizzaDataService.getProducts().subscribe(response => {
+            response['data'][0].forEach(product => {
+                ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
+                    .forEach(type => {
+                        if (product[type]) {
+                            this.custompizza[type] = product[type];
+                        }
                     });
-            },
+            });
+        },
             (err) => this.notificator.showError(err.error.message));
+
+        this.subscriptions.push(sub);
     }
 
     add(el) {
@@ -92,8 +98,8 @@ export class CustompizzaComponent implements OnInit {
 
         this.choosePizzaProducts();
 
-        this.pizzaDataService.addCustomPizzaToUserCart(this.selectedPizza).subscribe(
-            (response) => {
+        const sub = this.pizzaDataService.addCustomPizzaToUserCart(this.selectedPizza)
+            .subscribe((response) => {
                 const items = +this.cookieService.getCookie('cartItems');
                 const price = +this.cookieService.getCookie('cartPrice');
 
@@ -104,6 +110,8 @@ export class CustompizzaComponent implements OnInit {
                 this.selectedPizza = new CustomPizza();
             },
             (err) => this.notificator.showError(err.error.message));
+
+        this.subscriptions.push(sub);
     }
 
     choosePizzaProducts() {

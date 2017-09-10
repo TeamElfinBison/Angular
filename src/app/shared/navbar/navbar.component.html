@@ -33,14 +33,13 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="logo">
-                        <a href="#"><img src="/assets/images/logo.png" title="NG Pizza" alt="NG Pizza Logo"></a>
+                        <a [routerLink]="['/home']"><img src="/assets/images/logo.png" title="NG Pizza" alt="NG Pizza Logo"></a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="main-menu">
                         <ul>
                             <li><a [routerLink]="['/home']">Home</a></li>
-                            <!-- <li><a [routerLink]="['/about']">About</a></li> -->
                             <li><a [routerLink]="['/pizza/all']">Classic Pizza</a></li>
                             <li><a [routerLink]="['/pizza/custompizza']">Build your own pizza!</a></li>
                         </ul>
