@@ -52,6 +52,25 @@ const attachRouter = (data) => {
                     .then((curr) => sendSuccess('Current user!', res, curr))
                     .catch((err) => sendError(err, res));
             })
+        .post('/currentUser',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+                const order = req.body;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => {
+                        curr.orders.push(order);
+                        curr.cart.pizza = [];
+                        curr.cart.customPizza = [];
+                        curr.cart.price = 0;
+
+                        return data.updateUser(curr);
+                    })
+                    .then((curr) => sendSuccess('The order is coming in your way!', res, order))
+                    .catch((error) => sendError(error, res));
+            })
         .post('/shoppingCart',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {

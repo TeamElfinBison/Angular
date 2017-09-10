@@ -1,3 +1,4 @@
+import { AlerterService } from './../../core/alerter/alerter.service';
 import { Cart } from './../../models/Cart';
 import { CookieService } from './../../core/cookie/cookie.service';
 import { NotificatorService } from './../../core/notificator/notificator.service';
@@ -5,7 +6,8 @@ import { UsersDataService } from './../users-data/users-data.service';
 import { Product } from './../../models/Product';
 import { CustomPizza } from './../../models/CustomPizza';
 import { Pizza } from './../../models/Pizza';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { Order } from '../../models/Order';
 
 @Component({
     selector: 'app-shopping-cart',
@@ -13,13 +15,14 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./shopping-cart.component.css']
 })
 
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, DoCheck {
     public cart: Cart = new Cart();
 
     constructor(
         private readonly userDataService: UsersDataService,
         private readonly notificator: NotificatorService,
-        private readonly cookieService: CookieService
+        private readonly cookieService: CookieService,
+        private readonly alerter: AlerterService
     ) { }
 
     ngOnInit() {
@@ -28,6 +31,10 @@ export class ShoppingCartComponent implements OnInit {
         this.userDataService.getShoppingCart(token).subscribe(
             (response) => this.cart = response['data'][0],
             (err) => this.notificator.showError(err.error.message));
+    }
+
+    ngDoCheck() {
+        this.cart.price = +this.cookieService.getCookie('cartPrice');
     }
 
     removeCustomPizzaOrder(pizza: CustomPizza) {
@@ -76,5 +83,47 @@ export class ShoppingCartComponent implements OnInit {
             .deleteClassicPizzaFromCart(pizza.price.toString(), pizza, token).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message));
+    }
+
+    orderPizza() {
+        this.alerter.showPurchaseSuggestion()
+            .then(() => {
+                const order = new Order();
+                order.items = this.cart;
+                order.date = new Date();
+
+                const token = this.cookieService.getCookie('token');
+                return this.alerter.askForAddressSuggestion()
+                    .then(() => {
+                        this.userDataService.addOrderToUser(order, token)
+                            .subscribe(
+                            (response) => {
+                                this.alerter.showSuccessAlert('Ordered!', 'The order is comming in 30 minutes!');
+                                this.cart = new Cart();
+
+                                this.cookieService.setCookie('cartItems', '0');
+                                this.cookieService.setCookie('cartPrice', '0');
+                            },
+                            (err) => this.notificator.showError(err.error.message));
+                    })
+                    .catch(() => {
+                        return this.alerter.getAddressSuggestion()
+                            .then(() => {
+                                this.userDataService.addOrderToUser(order, token)
+                                    .subscribe(
+                                    (response) => {
+                                        this.alerter.showSuccessAlert('Ordered!', 'The order is comming in 30 minutes!');
+                                        this.cart = new Cart();
+
+                                        this.cookieService.setCookie('cartItems', '0');
+                                        this.cookieService.setCookie('cartPrice', '0');
+                                    },
+                                    (err) => this.notificator.showError(err.error.message));
+                            });
+                    });
+            })
+            .catch((error: string) => {
+                this.alerter.showErrorAlert('Cancelled', error);
+            });
     }
 }

@@ -1,3 +1,4 @@
+import { Order } from './../../models/Order';
 import { Pizza } from './../../models/Pizza';
 import { CustomPizza } from './../../models/CustomPizza';
 import { CookieService } from './../../core/cookie/cookie.service';
@@ -28,5 +29,10 @@ export class UsersDataService {
     deleteClassicPizzaFromCart(pizzaId: string, pizza: Pizza, token: string) {
         const headers = new HttpHeaders().set('token', token);
         return this.requester.put('/api/shoppingCart/' + pizzaId, pizza, headers);
+    }
+
+    addOrderToUser(order: Order, token: string) {
+        const headers = new HttpHeaders().set('token', token);
+        return this.requester.post('/api/currentUser', order, headers);
     }
 }
