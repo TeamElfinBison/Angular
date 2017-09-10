@@ -15,7 +15,7 @@ input::-webkit-input-placeholder {
 }
 
 .modal-body {
-    height: 25vh;
+    height: 30vh;
     overflow-y: auto;
 }
 
