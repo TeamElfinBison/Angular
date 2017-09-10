@@ -23,4 +23,11 @@ export class OrdersComponent implements OnInit {
             (response) => this.orders = response['data'][0],
             (err) => this.notificator.showError(err.error.message));
     }
+
+    // TODO
+    private displayOrderDetails(item) {
+        return item.items.pizza[0].name;
+        // alert(item.items.pizza[0].name);
+    }
+
 }

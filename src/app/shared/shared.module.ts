@@ -11,7 +11,8 @@ import { FooterComponent } from './footer/footer.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CapitalLetterPipe } from './capital-letter/capital-letter.pipe';
-import { DeliveryStatusPipe } from './delivery-status.pipe';
+import { DeliveryStatusPipe } from './pipes/delivery-status.pipe';
+import { OrderDetailsPipe } from './pipes/order-details.pipe';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { DeliveryStatusPipe } from './delivery-status.pipe';
         FooterComponent,
         CapitalLetterPipe,
         DeliveryStatusPipe,
+        OrderDetailsPipe,
     ],
     entryComponents: [
         LoginComponent,
@@ -42,7 +44,8 @@ import { DeliveryStatusPipe } from './delivery-status.pipe';
         CommonModule,
         NgxPaginationModule,
         CapitalLetterPipe,
-        DeliveryStatusPipe
+        DeliveryStatusPipe,
+        OrderDetailsPipe,
     ]
 })
 export class SharedModule { }
