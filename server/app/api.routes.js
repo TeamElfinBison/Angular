@@ -103,16 +103,6 @@ const attachRouter = (data) => {
                     .then((curr) => sendSuccess('Pizza "' + pizza.name + '" added to cart', res, curr))
                     .catch((error) => sendError(error, res));
             })
-        .get('/shoppingCart',
-            passport.authenticate('jwt', { session: false }),
-            (req, res) => {
-                const user = req.user;
-
-                data
-                    .findUserById(user._id.toString())
-                    .then((curr) => sendSuccess('Shopping cart!', res, curr.cart))
-                    .catch((error) => sendError(error, res));
-            })
         .post('/shoppingCart/:id',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {
