@@ -5,7 +5,7 @@
             <button type="button" class="close" (click)="close()">&times;</button>
             <h4 class="modal-title">{{title || 'Register'}}</h4>
         </div>
-        <form class="form-horizontal" (ngSubmit)='create(registerForm.value)' #registerForm=ngForm>
+        <form class="form-horizontal" (ngSubmit)='registerUser(registerForm.value)' #registerForm=ngForm>
 
             <div class="modal-body">
                 <div class="main-login main-center">
