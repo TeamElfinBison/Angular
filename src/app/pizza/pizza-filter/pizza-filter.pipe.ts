@@ -13,5 +13,4 @@ export class PizzaFilterPipe implements PipeTransform {
 
         return value.filter(x => x.type === filter.toLowerCase());
     }
-
 }

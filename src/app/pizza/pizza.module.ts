@@ -9,6 +9,7 @@ import { PizzaRoutingModule } from './pizza-routing.module';
 import { AllPizzaComponent } from './all-pizza/all-pizza.component';
 import { PizzaDetailsComponent } from './pizza-details/pizza-details.component';
 import { PizzaFilterPipe } from './pizza-filter/pizza-filter.pipe';
+import { HighlightPizzaDirective } from './highlight-pizza/highlight-pizza.directive';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { PizzaFilterPipe } from './pizza-filter/pizza-filter.pipe';
         AllPizzaComponent,
         PizzaDetailsComponent,
         PizzaFilterPipe,
+        HighlightPizzaDirective,
     ],
     imports: [
         SharedModule,
