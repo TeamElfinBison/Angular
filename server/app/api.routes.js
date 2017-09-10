@@ -113,7 +113,7 @@ const attachRouter = (data) => {
 
             data
                 .findUserById(user._id.toString())
-                .then((curr) => sendSuccess('User orders!', res, curr.cart))
+                .then((curr) => sendSuccess('User orders!', res, curr.orders))
                 .catch((error) => sendError(error, res));
         })
 ;

@@ -22,7 +22,7 @@ export class OrdersComponent implements OnInit {
             this.userDataService.getUserOrders(token).subscribe(
                 (response) => {
                     this.orders = response['data'][0];
-                    console.log(this.orders);
+                    console.log(response['data'][0]);
                 },
                 (err) => this.notificator.showError(err.error.message));
   }

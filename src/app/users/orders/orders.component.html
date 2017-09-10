@@ -13,29 +13,20 @@
       <p>*If your recent order has status "Delivered", but you didn't receive it yet, please contact us!</p>
       <table class="table table-hover" id="my-orders-table" data-show-toggle="false">
         <thead>
-          <tr>
-            <th>DATE</th>
-            <th>DELIVER TO</th>
-            <th>TOTAL</th>
-            <th>STATUS</th>
+          <tr class="row">
+            <th class="col-sm-2">DATE</th>
+            <th class="col-sm-6">DELIVER TO</th>
+            <th class="col-sm-2">TOTAL</th>
+            <th class="col-sm-3">STATUS</th>
           </tr>
         </thead>
         <tbody>
-            <tr class="TEST">
-                <td class="text-center">2</td>
-                <td class="text-center">{{order.address}}3</td>
-                <td class="text-center">{{order.price | currency:'USD':true }}4</td>
-                <td *ngIf="3 === 3"><i class="fa fa-check fa-fw icon" aria-hidden="true"> </i> DELIVERED</td>
-                <td *ngIf="2 === 1"><i class="fa fa-free-code-camp fa-fw icon" aria-hidden="true"> </i> We bake it...</td>
-            </tr>
-            <tr *ngFor="let order of orders" >
-                <td class="text-center">3</td>
-                <td class="text-center">{{order.address}}</td>
-                <td class="text-center">{{order.price | currency:'USD':true }}</td>
-
-                <td *ngIf="3 === 3"><i class="fa fa-check fa-fw icon" aria-hidden="true"> </i> DELIVERED</td>
-                <td *ngIf="2 === 1"><i class="fa fa-free-code-camp fa-fw icon" aria-hidden="true"> </i> We bake it...</td>
-                <td *ngIf="order.status === 2"><i class="fa fa-bicycle fa-fw icon" aria-hidden="true"> </i> With courier ...</td>
+            <tr class="row" *ngFor="let order of orders" >
+                <td class="col-sm-2">{{order.date | date:'short' }}
+                </td>
+                <td class="col-sm-6">{{order.address}}</td>
+                <td class="col-sm-2">{{order.price | currency:'USD':true }}</td>
+                <td class="col-sm-3" *ngIf="3 === 3"><i class="fa fa-check fa-fw icon" aria-hidden="true"> </i> DELIVERED</td>
             </tr>
         </tbody>
       </table>
