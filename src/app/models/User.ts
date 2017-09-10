@@ -9,4 +9,5 @@ export class User {
     lastName: string;
     password: string;
     cart: Cart;
+    orders: object[];
 }

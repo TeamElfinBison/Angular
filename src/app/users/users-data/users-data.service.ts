@@ -17,4 +17,8 @@ export class UsersDataService {
         const headers = new HttpHeaders().set('token', token);
         return this.requester.get('/api/shoppingCart', headers);
     }
+    getUserOrders(token: string) {
+        const headers = new HttpHeaders().set('token', token);
+        return this.requester.get('/api/orders', headers);
+    }
 }
