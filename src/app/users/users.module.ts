@@ -8,6 +8,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RouterModule } from '@angular/router';
+import { OrderDetailsPipe } from './order-details/order-details.pipe';
+import { DeliveryStatusPipe } from './delivery-status/delivery-status.pipe';
 
 @NgModule({
     imports: [
@@ -18,7 +20,9 @@ import { RouterModule } from '@angular/router';
     declarations: [
         ProfileComponent,
         OrdersComponent,
-        ShoppingCartComponent
+        ShoppingCartComponent,
+        OrderDetailsPipe,
+        DeliveryStatusPipe
     ],
     providers: [
         UsersDataService
