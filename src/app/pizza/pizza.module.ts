@@ -8,12 +8,14 @@ import { CommonModule } from '@angular/common';
 import { PizzaRoutingModule } from './pizza-routing.module';
 import { AllPizzaComponent } from './all-pizza/all-pizza.component';
 import { PizzaDetailsComponent } from './pizza-details/pizza-details.component';
+import { PizzaFilterPipe } from './pizza-filter/pizza-filter.pipe';
 
 @NgModule({
     declarations: [
         CustompizzaComponent,
         AllPizzaComponent,
         PizzaDetailsComponent,
+        PizzaFilterPipe,
     ],
     imports: [
         SharedModule,

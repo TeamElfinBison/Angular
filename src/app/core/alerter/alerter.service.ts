@@ -19,7 +19,7 @@ export class AlerterService {
         swal(title, message, 'error');
     }
 
-    showAddOrderSuggestion(id, name, imageUrl) {
+    showAddOrderSuggestion(name, imageUrl) {
         return new Promise((resolve, reject) => {
             swal({
                 title: 'Add pizza to cart?',

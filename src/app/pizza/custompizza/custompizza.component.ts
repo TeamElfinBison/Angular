@@ -90,6 +90,23 @@ export class CustompizzaComponent implements OnInit {
             return;
         }
 
+        this.choosePizzaProducts();
+
+        this.pizzaDataService.addCustomPizzaToUserCart(this.selectedPizza).subscribe(
+            (response) => {
+                const items = +this.cookieService.getCookie('cartItems');
+                const price = +this.cookieService.getCookie('cartPrice');
+
+                this.cookieService.setCookie('cartItems', (items + 1).toString());
+                this.cookieService.setCookie('cartPrice', (price + this.selectedPizza.price).toString());
+
+                this.notificator.showSuccess(response['message']);
+                this.selectedPizza = new CustomPizza();
+            },
+            (err) => this.notificator.showError(err.error.message));
+    }
+
+    choosePizzaProducts() {
         this.selectedPizza.price = this.custompizza.price;
         ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
             .forEach(type => {
@@ -103,21 +120,6 @@ export class CustompizzaComponent implements OnInit {
                     }
                 });
             });
-
-        const token = this.cookieService.getCookie('token');
-
-        this.pizzaDataService
-            .addCustomPizzaToUserCart(this.selectedPizza, token).subscribe(
-            (response) => {
-                const items = +this.cookieService.getCookie('cartItems');
-                const price = +this.cookieService.getCookie('cartPrice');
-
-                this.cookieService.setCookie('cartItems', (items + 1).toString());
-                this.cookieService.setCookie('cartPrice', (price + this.selectedPizza.price).toString());
-
-                this.notificator.showSuccess(response['message']);
-            },
-            (err) => this.notificator.showError(err.error.message));
     }
 
     findObjectByKey(array, key, value) {

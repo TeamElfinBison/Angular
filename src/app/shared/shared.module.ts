@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CapitalLetterPipe } from './capital-letter/capital-letter.pipe';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     declarations: [
         NavbarComponent,
         FooterComponent,
+        CapitalLetterPipe,
     ],
     entryComponents: [
         LoginComponent,
@@ -36,7 +38,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
         RegisterComponent,
         LogoutComponent,
         CommonModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        CapitalLetterPipe
     ]
 })
 export class SharedModule { }

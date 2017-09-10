@@ -27,9 +27,7 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
     ) { }
 
     ngOnInit() {
-        const token = this.cookieService.getCookie('token');
-
-        this.userDataService.getCurrentUserInfo(token).subscribe(
+        this.userDataService.getCurrentUserInfo().subscribe(
             (response) => {
                 this.cart = response['data'][0].cart;
                 this.address = response['data'][0].address;
@@ -46,23 +44,18 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
             .filter(x => {
                 return Object.keys(pizza).some(key => {
                     if (pizza[key].length) {
-                        return pizza[key].some(type => !!x[key].find(y => y !== type));
+                        return pizza[key].some(type => {
+                            return !!x[key].find(y => y.toString() !== type.toString());
+                        });
                     }
 
                     return pizza[key] !== x[key];
                 });
             });
 
-        const cartItems = +this.cookieService.getCookie('cartItems') - 1;
-        const cartPrice = +this.cookieService.getCookie('cartPrice') - pizza.price;
+        this.successRemovePizza(pizza);
 
-        this.cookieService.setCookie('cartItems', cartItems.toString());
-        this.cookieService.setCookie('cartPrice', cartPrice.toString());
-
-        // needs refactoring !!
-        const token = this.cookieService.getCookie('token');
-        this.userDataService
-            .deleteCustomPizzaFromCart(pizza.price.toString(), pizza, token).subscribe(
+        this.userDataService.deleteCustomPizzaFromCart(pizza).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message));
     }
@@ -75,16 +68,9 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
                 });
             });
 
-        const cartItems = +this.cookieService.getCookie('cartItems') - 1;
-        const cartPrice = +this.cookieService.getCookie('cartPrice') - pizza.price;
+        this.successRemovePizza(pizza);
 
-        this.cookieService.setCookie('cartItems', cartItems.toString());
-        this.cookieService.setCookie('cartPrice', cartPrice.toString());
-
-        // needs refactoring !!
-        const token = this.cookieService.getCookie('token');
-        this.userDataService
-            .deleteClassicPizzaFromCart(pizza.price.toString(), pizza, token).subscribe(
+        this.userDataService.deleteClassicPizzaFromCart(pizza).subscribe(
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message));
     }
@@ -93,23 +79,15 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
         this.alerter.showPurchaseSuggestion()
             .then(() => {
                 const order = new Order();
-                order.items = this.cart;
                 order.date = new Date();
+                order.items = this.cart;
 
-                const token = this.cookieService.getCookie('token');
                 return this.alerter.askForAddressSuggestion()
                     .then(() => {
                         order.address = this.address;
 
-                        this.userDataService.addOrderToUser(order, token)
-                            .subscribe(
-                            (response) => {
-                                this.alerter.showSuccessAlert('Ordered!', 'The order is comming in 30 minutes!');
-                                this.cart = new Cart();
-
-                                this.cookieService.setCookie('cartItems', '0');
-                                this.cookieService.setCookie('cartPrice', '0');
-                            },
+                        this.userDataService.addOrderToUser(order).subscribe(
+                            (response) => this.successOrderPizza(),
                             (err) => this.notificator.showError(err.error.message));
                     })
                     .catch(() => {
@@ -117,15 +95,8 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
                             .then((address: string) => {
                                 order.address = address;
 
-                                this.userDataService.addOrderToUser(order, token)
-                                    .subscribe(
-                                    (response) => {
-                                        this.alerter.showSuccessAlert('Ordered!', 'The order is comming in 30 minutes!');
-                                        this.cart = new Cart();
-
-                                        this.cookieService.setCookie('cartItems', '0');
-                                        this.cookieService.setCookie('cartPrice', '0');
-                                    },
+                                this.userDataService.addOrderToUser(order).subscribe(
+                                    (response) => this.successOrderPizza(),
                                     (err) => this.notificator.showError(err.error.message));
                             });
                     });
@@ -133,5 +104,21 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
             .catch((error: string) => {
                 this.alerter.showErrorAlert('Cancelled', error);
             });
+    }
+
+    private successOrderPizza() {
+        this.alerter.showSuccessAlert('Ordered!', 'The order is comming in 30 minutes!');
+        this.cart = new Cart();
+
+        this.cookieService.setCookie('cartItems', '0');
+        this.cookieService.setCookie('cartPrice', '0');
+    }
+
+    private successRemovePizza(pizza) {
+        const cartItems = +this.cookieService.getCookie('cartItems') - 1;
+        const cartPrice = +this.cookieService.getCookie('cartPrice') - pizza.price;
+
+        this.cookieService.setCookie('cartItems', cartItems.toString());
+        this.cookieService.setCookie('cartPrice', cartPrice.toString());
     }
 }

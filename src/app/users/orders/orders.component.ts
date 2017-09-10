@@ -1,29 +1,26 @@
+import { Order } from './../../models/Order';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from './../../core/cookie/cookie.service';
 import { UsersDataService } from './../users-data/users-data.service';
 import { NotificatorService } from './../../core/notificator/notificator.service';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+    selector: 'app-orders',
+    templateUrl: './orders.component.html',
+    styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  public orders = [];
+    public orders: Order[] = [];
 
-  constructor(
-    private readonly userDataService: UsersDataService,
-    private readonly notificator: NotificatorService,
-    private readonly cookieService: CookieService
-) { }
+    constructor(
+        private readonly userDataService: UsersDataService,
+        private readonly notificator: NotificatorService,
+        private readonly cookieService: CookieService
+    ) { }
 
-  ngOnInit() {
-    const token = this.cookieService.getCookie('token');
-            this.userDataService.getUserOrders(token).subscribe(
-                (response) => {
-                    this.orders = response['data'][0];
-                    console.log(response['data'][0]);
-                },
-                (err) => this.notificator.showError(err.error.message));
-  }
+    ngOnInit() {
+        this.userDataService.getUserOrders().subscribe(
+            (response) => this.orders = response['data'][0],
+            (err) => this.notificator.showError(err.error.message));
+    }
 }

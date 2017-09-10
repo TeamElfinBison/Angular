@@ -34,12 +34,10 @@ export class PizzaDetailsComponent implements OnInit {
 
     orderPizza() {
         this.alerter
-            .showAddOrderSuggestion(this.pizza._id, this.pizza.name, this.pizza.imgUrl)
+            .showAddOrderSuggestion(this.pizza.name, this.pizza.imgUrl)
             .then(() => {
                 if (this.userInfoService.isLoggedUser()) {
-                    const token = this.cookieService.getCookie('token');
-
-                    this.pizzaDataService.addPizzaToUserCart(this.pizza, token).subscribe(
+                    this.pizzaDataService.addPizzaToUserCart(this.pizza).subscribe(
                         (response) => {
                             const items = +this.cookieService.getCookie('cartItems');
                             const price = +this.cookieService.getCookie('cartPrice');
@@ -48,7 +46,6 @@ export class PizzaDetailsComponent implements OnInit {
                             this.cookieService.setCookie('cartPrice', (price + this.pizza.price).toString());
 
                             this.alerter.showSuccessAlert('Added!', response['message']);
-                            // this.notificator.showSuccess(response['message']);
                         },
                         (err) => this.notificator.showError(err.error.message));
                 } else {

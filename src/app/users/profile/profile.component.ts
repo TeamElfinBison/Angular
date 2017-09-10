@@ -14,13 +14,12 @@ export class ProfileComponent implements OnInit {
 
     constructor(
         private readonly usersDataService: UsersDataService,
-        private readonly notificator: NotificatorService,
-        private readonly cookieService: CookieService) { }
+        private readonly notificator: NotificatorService) { }
 
     ngOnInit() {
         this.currentUser = new User();
 
-        this.usersDataService.getCurrentUserInfo(this.cookieService.getCookie('token'))
+        this.usersDataService.getCurrentUserInfo()
             .subscribe(response => this.currentUser = response['data'][0],
             (err) => this.notificator.showError(err.error.message));
     }

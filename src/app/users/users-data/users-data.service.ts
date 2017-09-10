@@ -9,32 +9,43 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UsersDataService {
 
-    constructor(private readonly requester: RequesterService) { }
+    constructor(
+        private readonly requester: RequesterService,
+        private readonly cookieService: CookieService
+    ) { }
 
-    getCurrentUserInfo(token: string) {
+    getCurrentUserInfo() {
+        const token = this.cookieService.getCookie('token');
         const headers = new HttpHeaders().set('token', token);
+
         return this.requester.get('/api/currentUser', headers);
     }
 
-    getShoppingCart(token: string) {
+    deleteCustomPizzaFromCart(pizza: CustomPizza) {
+        const token = this.cookieService.getCookie('token');
         const headers = new HttpHeaders().set('token', token);
-        return this.requester.get('/api/shoppingCart', headers);
-    }
-    getUserOrders(token: string) {
-        const headers = new HttpHeaders().set('token', token);
-        return this.requester.get('/api/orders', headers);
-    }
-    deleteCustomPizzaFromCart(pizzaId: string, pizza: CustomPizza, token: string) {
-        const headers = new HttpHeaders().set('token', token);
-        return this.requester.post('/api/shoppingCart/' + pizzaId, pizza, headers);
+
+        return this.requester.put('/api/shoppingCart/customPizza', pizza, headers);
     }
 
-    deleteClassicPizzaFromCart(pizzaId: string, pizza: Pizza, token: string) {
+    deleteClassicPizzaFromCart(pizza: Pizza) {
+        const token = this.cookieService.getCookie('token');
         const headers = new HttpHeaders().set('token', token);
-        return this.requester.put('/api/shoppingCart/' + pizzaId, pizza, headers);
+
+        return this.requester.put('/api/shoppingCart/pizza', pizza, headers);
     }
-    addOrderToUser(order: Order, token: string) {
+
+    addOrderToUser(order: Order) {
+        const token = this.cookieService.getCookie('token');
         const headers = new HttpHeaders().set('token', token);
+
         return this.requester.post('/api/currentUser', order, headers);
+    }
+
+    getUserOrders() {
+        const token = this.cookieService.getCookie('token');
+        const headers = new HttpHeaders().set('token', token);
+
+        return this.requester.get('/api/orders', headers);
     }
 }

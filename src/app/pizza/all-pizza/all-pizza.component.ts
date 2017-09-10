@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class AllPizzaComponent implements OnInit {
     public pizza: Pizza[];
     public currentPage = 1;
+    public filter = 'all';
 
     constructor(
         private readonly pizzaDataService: PizzaDataService,
@@ -24,5 +25,9 @@ export class AllPizzaComponent implements OnInit {
 
     pageChanged(pageNumber) {
         this.currentPage = pageNumber;
+    }
+
+    changeFilter(event) {
+        this.filter = event.target.innerHTML;
     }
 }

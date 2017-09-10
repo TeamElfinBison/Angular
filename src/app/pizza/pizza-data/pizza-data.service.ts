@@ -1,3 +1,4 @@
+import { CookieService } from './../../core/cookie/cookie.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Pizza } from './../../models/Pizza';
 import { CustomPizza } from './../../models/CustomPizza';
@@ -6,7 +7,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PizzaDataService {
-    constructor(private readonly requester: RequesterService) { }
+    constructor(
+        private readonly requester: RequesterService,
+        private readonly cookieService: CookieService
+    ) { }
 
     getAllPizza() {
         return this.requester.get('/api/pizza');
@@ -16,13 +20,17 @@ export class PizzaDataService {
         return this.requester.get('/api/products');
     }
 
-    addPizzaToUserCart(pizza: Pizza, token: string) {
+    addPizzaToUserCart(pizza: Pizza) {
+        const token = this.cookieService.getCookie('token');
         const headers = new HttpHeaders().set('token', token);
-        return this.requester.put('/api/shoppingCart', pizza, headers);
+
+        return this.requester.post('/api/shoppingCart/pizza', pizza, headers);
     }
 
-    addCustomPizzaToUserCart(pizza: CustomPizza, token: string) {
+    addCustomPizzaToUserCart(pizza: CustomPizza) {
+        const token = this.cookieService.getCookie('token');
         const headers = new HttpHeaders().set('token', token);
-        return this.requester.post('/api/shoppingCart', pizza, headers);
+
+        return this.requester.post('/api/shoppingCart/customPizza', pizza, headers);
     }
 }
