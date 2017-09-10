@@ -69,7 +69,7 @@
                         <label for="address" class="cols-sm-2 control-label">Address for delivery</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></span>
                                 <input class='form-control' placeholder='City, Street, Number, Zip Code' name="address" (ngModel)="user.address" #addressInput=ngModel required>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                         <label for="phone" class="cols-sm-2 control-label">Mobile Number</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i></span>
                                 <input class='form-control' placeholder='Phone' name="phone" (ngModel)="user.phone" #phoneInput=ngModel required>
                                 <span class="input-group-addon red" *ngIf="!phoneInput.valid && phoneInput.touched || mouseover && !phoneInput.valid">Required</span>
                             </div>

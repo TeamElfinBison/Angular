@@ -1,4 +1,32 @@
-<h1>User info:</h1>
-<h5>Username: {{currentUser.username}}</h5>
-<h5>First name: {{currentUser.firstName}}</h5>
-<h5>Last name: {{currentUser.lastName}}</h5>
+<div class="container">
+    <div class="">
+        <div class="row">
+            <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
+            </div>
+            <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                <div class="container">
+                    <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+                </div>
+                <hr>
+                <ul class="container details">
+                    <li>
+                        <p><span class="glyphicon glyphicon-user one"></span> {{currentUser.username}}</p>
+                    </li>
+                    <li>
+                        <p><span class="glyphicon glyphicon-earphone one"></span> {{currentUser.phone}}</p>
+                    </li>
+                    <li>
+                        <p><span class="glyphicon glyphicon-map-marker one"></span> {{currentUser.address}}</p>
+                    </li>
+                    <li>
+                        <p><span class="glyphicon glyphicon-new-window one"></span><a [routerLink]="['/users/cart']"> Cart</a></p>
+                    </li>
+                    <li>
+                        <p><span class="glyphicon glyphicon-new-window one"></span> <a [routerLink]="['/users/orders']">My Orders</a></p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
