@@ -52,6 +52,25 @@ const attachRouter = (data) => {
                     .then((curr) => sendSuccess('Current user!', res, curr))
                     .catch((err) => sendError(err, res));
             })
+        .post('/currentUser',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+                const order = req.body;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => {
+                        curr.orders.push(order);
+                        curr.cart.pizza = [];
+                        curr.cart.customPizza = [];
+                        curr.cart.price = 0;
+
+                        return data.updateUser(curr);
+                    })
+                    .then((curr) => sendSuccess('The order is coming in your way!', res, order))
+                    .catch((error) => sendError(error, res));
+            })
         .post('/shoppingCart',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {
@@ -84,16 +103,58 @@ const attachRouter = (data) => {
                     .then((curr) => sendSuccess('Pizza "' + pizza.name + '" added to cart', res, curr))
                     .catch((error) => sendError(error, res));
             })
-        .get('/shoppingCart',
+        .post('/shoppingCart/:id',
             passport.authenticate('jwt', { session: false }),
             (req, res) => {
                 const user = req.user;
+                const pizza = req.body;
 
                 data
                     .findUserById(user._id.toString())
-                    .then((curr) => sendSuccess('Shopping cart!', res, curr.cart))
+                    .then((curr) => {
+                        curr.cart.customPizza = curr.cart.customPizza
+                            .filter((x) => {
+                                return Object.keys(pizza).some((key) => {
+                                    if (pizza[key].length) {
+                                        return pizza[key].some((type) => {
+                                            return !!x[key].find((y) => y.toString() !== type.toString());
+                                        });
+                                    }
+
+                                    return pizza[key].toString() !== x[key].toString();
+                                });
+                            });
+
+                        curr.cart.price -= pizza.price;
+                        return data.updateUser(curr);
+                    })
+                    .then((curr) => sendSuccess('Custom pizza removed from cart', res, curr))
                     .catch((error) => sendError(error, res));
-            })
+            }
+        )
+        .put('/shoppingCart/:id',
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
+                const pizza = req.body;
+
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => {
+                        curr.cart.pizza = curr.cart.pizza
+                            .filter((x) => {
+                                return Object.keys(pizza).some((key) => {
+                                    return pizza[key].toString() !== x[key].toString();
+                                });
+                            });
+
+                        curr.cart.price -= pizza.price;
+                        return data.updateUser(curr);
+                    })
+                    .then((curr) => sendSuccess('Pizza "' + pizza.name + '" removed from cart', res, curr))
+                    .catch((error) => sendError(error, res));
+            }
+        )
         .get('/products', (req, res) => {
             data
                 .getAllProducts()
@@ -105,7 +166,18 @@ const attachRouter = (data) => {
                 .getAllPizza()
                 .then((pizza) => sendSuccess('All pizza!', res, pizza))
                 .catch((error) => sendError(error, res));
-        });
+        })
+        .get('/orders',
+        passport.authenticate('jwt', { session: false }),
+        (req, res) => {
+            const user = req.user;
+
+            data
+                .findUserById(user._id.toString())
+                .then((curr) => sendSuccess('User orders!', res, curr.orders))
+                .catch((error) => sendError(error, res));
+        })
+;
 
     return router;
 };

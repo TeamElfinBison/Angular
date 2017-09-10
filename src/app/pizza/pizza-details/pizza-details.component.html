@@ -10,7 +10,7 @@
         </div>
         <div class="label-text" class='text-center'>
             <h3>{{pizza.name}}</h3>
-            <span class="text-category">${{pizza.price}}</span>
+            <span class="text-category">{{pizza.price | currency:'USD':true }}</span>
         </div>
     </div>
 </div>
