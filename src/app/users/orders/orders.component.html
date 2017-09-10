@@ -26,7 +26,7 @@
                         </td>
                         <td class="col-sm-6">{{order.address}}</td>
                         <td class="col-sm-2">{{order.items.price | currency:'USD':true }}</td>
-                        <td class="col-sm-3" *ngIf="3 === 3"><i class="fa fa-check fa-fw icon" aria-hidden="true"> </i> DELIVERED</td>
+                        <td class="col-sm-3"><i class="fa fa-check fa-fw icon" aria-hidden="true"> </i>{{order.date | deliveryStatus}}</td>
                     </tr>
                 </tbody>
             </table>
