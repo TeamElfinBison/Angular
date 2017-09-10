@@ -34,7 +34,7 @@ export class PizzaDetailsComponent implements OnInit {
 
     orderPizza() {
         this.alerter
-            .showOrderSuggestion(this.pizza._id, this.pizza.name, this.pizza.imgUrl)
+            .showAddOrderSuggestion(this.pizza._id, this.pizza.name, this.pizza.imgUrl)
             .then(() => {
                 if (this.userInfoService.isLoggedUser()) {
                     const token = this.cookieService.getCookie('token');
