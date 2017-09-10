@@ -16,11 +16,6 @@ export class UsersDataService {
         return this.requester.get('/api/currentUser', headers);
     }
 
-    getShoppingCart(token: string) {
-        const headers = new HttpHeaders().set('token', token);
-        return this.requester.get('/api/shoppingCart', headers);
-    }
-
     deleteCustomPizzaFromCart(pizzaId: string, pizza: CustomPizza, token: string) {
         const headers = new HttpHeaders().set('token', token);
         return this.requester.post('/api/shoppingCart/' + pizzaId, pizza, headers);

@@ -17,6 +17,7 @@ import { Order } from '../../models/Order';
 
 export class ShoppingCartComponent implements OnInit, DoCheck {
     public cart: Cart = new Cart();
+    public address: string;
 
     constructor(
         private readonly userDataService: UsersDataService,
@@ -28,8 +29,11 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
     ngOnInit() {
         const token = this.cookieService.getCookie('token');
 
-        this.userDataService.getShoppingCart(token).subscribe(
-            (response) => this.cart = response['data'][0],
+        this.userDataService.getCurrentUserInfo(token).subscribe(
+            (response) => {
+                this.cart = response['data'][0].cart;
+                this.address = response['data'][0].address;
+            },
             (err) => this.notificator.showError(err.error.message));
     }
 
@@ -95,6 +99,8 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
                 const token = this.cookieService.getCookie('token');
                 return this.alerter.askForAddressSuggestion()
                     .then(() => {
+                        order.address = this.address;
+
                         this.userDataService.addOrderToUser(order, token)
                             .subscribe(
                             (response) => {
@@ -108,7 +114,9 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
                     })
                     .catch(() => {
                         return this.alerter.getAddressSuggestion()
-                            .then(() => {
+                            .then((address: string) => {
+                                order.address = address;
+
                                 this.userDataService.addOrderToUser(order, token)
                                     .subscribe(
                                     (response) => {
