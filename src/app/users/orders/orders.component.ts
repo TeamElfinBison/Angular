@@ -1,5 +1,6 @@
+import { Subscription } from 'rxjs/Subscription';
 import { Order } from './../../models/Order';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CookieService } from './../../core/cookie/cookie.service';
 import { UsersDataService } from './../users-data/users-data.service';
 import { NotificatorService } from './../../core/notificator/notificator.service';
@@ -9,8 +10,9 @@ import { NotificatorService } from './../../core/notificator/notificator.service
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, OnDestroy {
     public orders: Order[] = [];
+    public subscription: Subscription;
 
     constructor(
         private readonly userDataService: UsersDataService,
@@ -18,8 +20,12 @@ export class OrdersComponent implements OnInit {
         private readonly cookieService: CookieService
     ) { }
 
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
     ngOnInit() {
-        this.userDataService.getUserOrders().subscribe(
+        this.subscription = this.userDataService.getUserOrders().subscribe(
             (response) => this.orders = response['data'][0],
             (err) => this.notificator.showError(err.error.message));
     }

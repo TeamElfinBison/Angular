@@ -1,7 +1,9 @@
+import { Subscription } from 'rxjs/Subscription';
 import { Pizza } from './../../models/Pizza';
 import { NotificatorService } from './../../core/notificator/notificator.service';
 import { PizzaDataService } from './../pizza-data/pizza-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-all-pizza',
@@ -15,12 +17,12 @@ export class AllPizzaComponent implements OnInit {
 
     constructor(
         private readonly pizzaDataService: PizzaDataService,
-        private readonly notificator: NotificatorService) { }
+        private readonly notificator: NotificatorService,
+        private readonly activatedRoute: ActivatedRoute
+    ) { }
 
     ngOnInit() {
-        this.pizzaDataService.getAllPizza()
-            .subscribe(response => this.pizza = response['data'][0],
-            (err) => this.notificator.showError(err.error.message));
+        this.pizza = this.activatedRoute.snapshot.data['pizza']['data'][0];
     }
 
     pageChanged(pageNumber) {

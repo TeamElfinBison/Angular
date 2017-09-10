@@ -1,11 +1,12 @@
+import { Subscription } from 'rxjs/Subscription';
 import { CookieService } from './../../core/cookie/cookie.service';
 import { PizzaDataService } from './../pizza-data/pizza-data.service';
 import { CustomPizza } from './../../models/CustomPizza';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Pizza } from '../../models/Pizza';
 import { NotificatorService } from '../../core/notificator/notificator.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserInfoService } from '../../core/user-info/user-info.service';
 import { LoginComponent } from '../../shared/authentication/login/login.component';
 
@@ -14,8 +15,9 @@ import { LoginComponent } from '../../shared/authentication/login/login.componen
     templateUrl: './custompizza.component.html',
     styleUrls: ['./custompizza.component.css']
 })
-export class CustompizzaComponent implements OnInit {
-    isLoggedUser: boolean;
+export class CustompizzaComponent implements OnInit, OnDestroy {
+    public isLoggedUser: boolean;
+    public subscription: Subscription = new Subscription();
     public custompizza: CustomPizza = new CustomPizza();
     public selectedPizza: CustomPizza = new CustomPizza();
 
@@ -25,25 +27,27 @@ export class CustompizzaComponent implements OnInit {
         private readonly dialogService: DialogService,
         private readonly notificator: NotificatorService,
         private readonly pizzaDataService: PizzaDataService,
-        private readonly router: Router) {
+        private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute
+    ) {
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     ngOnInit() {
         this.custompizza.price = 0;
 
-        this.pizzaDataService.getProducts()
-            .subscribe(response => {
-                response['data'][0]
-                    .forEach(product => {
-                        ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
-                            .forEach(type => {
-                                if (product[type]) {
-                                    this.custompizza[type] = product[type];
-                                }
-                            });
+        this.activatedRoute.snapshot.data['products']['data'][0]
+            .forEach(product => {
+                ['dough', 'meat', 'sauce', 'cheese', 'vegetables']
+                    .forEach(type => {
+                        if (product[type]) {
+                            this.custompizza[type] = product[type];
+                        }
                     });
-            },
-            (err) => this.notificator.showError(err.error.message));
+            });
     }
 
     add(el) {
@@ -92,8 +96,8 @@ export class CustompizzaComponent implements OnInit {
 
         this.choosePizzaProducts();
 
-        this.pizzaDataService.addCustomPizzaToUserCart(this.selectedPizza).subscribe(
-            (response) => {
+        this.subscription = this.pizzaDataService.addCustomPizzaToUserCart(this.selectedPizza)
+            .subscribe((response) => {
                 const items = +this.cookieService.getCookie('cartItems');
                 const price = +this.cookieService.getCookie('cartPrice');
 

@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
                 <div class="container">
-                    <h2>{{currentUser.firstName | capitalLetter}} {{currentUser.lastName | capitalLetter}}</h2>
+                    <h2 *ngIf='currentUser.firstName && currentUser.lastName'>{{currentUser.firstName | capitalLetter}} {{currentUser.lastName | capitalLetter}}</h2>
                 </div>
                 <hr>
                 <ul class="container details">
