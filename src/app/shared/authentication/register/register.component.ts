@@ -5,6 +5,7 @@ import { User } from './../../../models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
+import { LoginComponent } from '../login/login.component';
 
 
 export interface RegisterModal {
@@ -40,5 +41,9 @@ export class RegisterComponent extends DialogComponent<RegisterModal, null> impl
             (response) => this.notificator.showSuccess(response['message']),
             (err) => this.notificator.showError(err.error.message),
             () => this.close());
+    }
+    showLoginModal() {
+        this.close();
+        this.dialogService.addDialog(LoginComponent, { title: 'Log In' });
     }
 }

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from '../../../core/cookie/cookie.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
+import { RegisterModal, RegisterComponent } from '../register/register.component';
 
 export interface LoginModal {
     title: string;
@@ -34,8 +35,8 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
     ngOnInit() {
     }
 
-    loginUser() {
-        this.userAuth.loginUser(this.user).subscribe(
+    loginUser(data: User) {
+        this.userAuth.loginUser(data).subscribe(
             (response) => {
                 const user = response['data'][0].user;
                 const cartItems = user.cart.pizza.length + user.cart.customPizza.length;
@@ -50,6 +51,10 @@ export class LoginComponent extends DialogComponent<LoginModal, null> implements
             },
             (err) => this.notificator.showError(err.error.message),
         );
+    }
+    showRegisterModal() {
+        this.close();
+        this.dialogService.addDialog(RegisterComponent, { title: 'Register' });
     }
 }
 

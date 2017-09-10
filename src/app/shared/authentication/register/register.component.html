@@ -93,6 +93,8 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <a class="btn btn-primary left" (click)="showLoginModal();">Log in</a>
+
                 <span (mouseenter)="mouseover=true" (mouseleave)="mouseover=false">
             <button class="btn btn-success" type="submit" [disabled]="!registerForm.valid">Register</button></span>
                 <button type="button" class="btn btn-default" (click)="close()">Cancel</button>
