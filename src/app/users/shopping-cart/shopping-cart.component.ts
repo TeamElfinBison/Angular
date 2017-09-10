@@ -40,19 +40,20 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
     }
 
     removeCustomPizzaOrder(pizza: CustomPizza) {
-        this.cart.customPizza = this.cart.customPizza
-            .filter(x => {
-                return Object.keys(pizza).some(key => {
+        const deletingPizza = this.cart.customPizza
+            .find(x => {
+                return Object.keys(pizza).every(key => {
                     if (pizza[key].length) {
-                        return pizza[key].some(type => {
-                            return !!x[key].find(y => y.toString() !== type.toString());
+                        return pizza[key].every(type => {
+                            return !!x[key].find(y => y.toString() === type.toString());
                         });
                     }
 
-                    return pizza[key] !== x[key];
+                    return pizza[key] === x[key];
                 });
             });
 
+        this.cart.customPizza = this.cart.customPizza.filter(x => x !== deletingPizza);
         this.successRemovePizza(pizza);
 
         this.userDataService.deleteCustomPizzaFromCart(pizza).subscribe(
@@ -61,13 +62,14 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
     }
 
     removeClassicPizzaOrder(pizza: Pizza) {
-        this.cart.pizza = this.cart.pizza
-            .filter(x => {
-                return Object.keys(pizza).some(key => {
-                    return pizza[key] !== x[key];
+        const deletingPizza = this.cart.pizza
+            .find(x => {
+                return Object.keys(pizza).every(key => {
+                    return pizza[key] === x[key];
                 });
             });
 
+        this.cart.pizza = this.cart.pizza.filter(x => x !== deletingPizza);
         this.successRemovePizza(pizza);
 
         this.userDataService.deleteClassicPizzaFromCart(pizza).subscribe(

@@ -5,6 +5,7 @@
             <img src="/assets/images/under-heading.png" alt="">
         </div>
     </div>
+    <h1 *ngIf='cart.price <= 0'>The cart is empty!</h1>
     <div class="row">
         <ng-container *ngFor="let customPizza of cart.customPizza; let i = index">
             <div class="customPizza row">
@@ -48,7 +49,7 @@
             </div>
             <hr>
         </ng-container>
-        <div class="purchase">
+        <div *ngIf='cart.price > 0' class="purchase">
             <div class="col-md-7"></div>
             <div class="col-md-2 total-text">
                 <h4>All Total:</h4>

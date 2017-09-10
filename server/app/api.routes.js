@@ -114,23 +114,24 @@ const attachRouter = (data) => {
                 data
                     .findUserById(user._id.toString())
                     .then((curr) => {
-                        curr.cart.customPizza = curr.cart.customPizza
-                            .filter((x) => {
-                                return Object.keys(pizza).some((key) => {
+                        const deletingPizza = curr.cart.customPizza
+                            .find((x) => {
+                                return Object.keys(pizza).every((key) => {
                                     if (pizza[key].length) {
-                                        return pizza[key].some((type) => {
-                                            return !!x[key]
-                                                .find((y) => {
-                                                    return y.toString() !==
-                                                        type.toString();
-                                                });
+                                        return pizza[key].every((type) => {
+                                            return !!x[key].find((y) => {
+                                                return y.toString() ===
+                                                    type.toString();
+                                            });
                                         });
                                     }
-
-                                    return pizza[key].toString() !==
-                                        x[key].toString();
+                                    return pizza[key] === x[key];
                                 });
                             });
+
+                        curr.cart.customPizza = curr.cart.customPizza.filter((x) => {
+                            return x !== deletingPizza;
+                        });
 
                         curr.cart.price -= pizza.price;
                         return data.updateUser(curr);
@@ -177,13 +178,17 @@ const attachRouter = (data) => {
                 data
                     .findUserById(user._id.toString())
                     .then((curr) => {
-                        curr.cart.pizza = curr.cart.pizza
-                            .filter((x) => {
-                                return Object.keys(pizza).some((key) => {
-                                    return pizza[key].toString() !==
+                        const deletingPizza = curr.cart.pizza
+                            .find((x) => {
+                                return Object.keys(pizza).every((key) => {
+                                    return pizza[key].toString() ===
                                         x[key].toString();
                                 });
                             });
+
+                        curr.cart.pizza = curr.cart.pizza.filter((x) => {
+                            return x !== deletingPizza;
+                        });
 
                         curr.cart.price -= pizza.price;
                         return data.updateUser(curr);
@@ -213,16 +218,17 @@ const attachRouter = (data) => {
                 .catch((error) => sendError(error, res));
         })
         .get('/orders',
-        passport.authenticate('jwt', { session: false }),
-        (req, res) => {
-            const user = req.user;
+            passport.authenticate('jwt', { session: false }),
+            (req, res) => {
+                const user = req.user;
 
-            data
-                .findUserById(user._id.toString())
-                .then((curr) => sendSuccess('User orders!', res, curr.orders))
-                .catch((error) => sendError(error, res));
-        })
-;
+                data
+                    .findUserById(user._id.toString())
+                    .then((curr) => {
+                        sendSuccess('User orders!', res, curr.orders);
+                    })
+                    .catch((error) => sendError(error, res));
+            });
 
     return router;
 };
