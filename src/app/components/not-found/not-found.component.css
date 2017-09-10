@@ -50,20 +50,23 @@ a:hover {
     right: 0;
 }
 
-#video {
+#video,
+video {
     position: relative;
     height: 500px;
     width: 100%;
 }
 
 @media screen and (max-width: 768px) {
-    #video {
+    #video,
+    video {
         height: 400px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    #video {
+    #video,
+    video {
         height: 200px;
     }
 }
@@ -96,7 +99,4 @@ a:hover {
 
 video {
     z-index: -3;
-    position: relative;
-    height: 500px;
-    width: 100%;
 }

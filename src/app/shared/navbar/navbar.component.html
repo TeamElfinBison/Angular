@@ -11,9 +11,9 @@
                         <span>Hello</span>
                         <a>{{loggedUserUsername}}!</a>
                         <ul class="dropdown-content">
-                            <li><a [routerLink]="['/users/profile']"> Profile</a></li>
-                            <li><a [routerLink]="['/users/orders']"> My orders</a></li>
-                            <li><a [routerLink]="['/logout']">Log out</a></li>
+                            <li [routerLink]="['/users/profile']"><a> Profile</a></li>
+                            <li [routerLink]="['/users/orders']"><a> My orders</a></li>
+                            <li [routerLink]="['/logout']"><a>Log out</a></li>
                         </ul>
 
 
