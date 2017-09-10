@@ -104,10 +104,7 @@ export class CustompizzaComponent implements OnInit {
                 });
             });
 
-        const token = this.cookieService.getCookie('token');
-
-        this.pizzaDataService
-            .addCustomPizzaToUserCart(this.selectedPizza, token).subscribe(
+        this.pizzaDataService.addCustomPizzaToUserCart(this.selectedPizza).subscribe(
             (response) => {
                 const items = +this.cookieService.getCookie('cartItems');
                 const price = +this.cookieService.getCookie('cartPrice');
@@ -116,6 +113,8 @@ export class CustompizzaComponent implements OnInit {
                 this.cookieService.setCookie('cartPrice', (price + this.selectedPizza.price).toString());
 
                 this.notificator.showSuccess(response['message']);
+                // refresh page
+                // this.router.navigate(['/pizza/custompizza?refresh=true']);
             },
             (err) => this.notificator.showError(err.error.message));
     }

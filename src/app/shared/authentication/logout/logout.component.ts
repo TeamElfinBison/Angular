@@ -19,11 +19,10 @@ export class LogoutComponent implements OnInit {
         private readonly router: Router) { }
 
     ngOnInit() {
-        this.userAuth.logoutUser(this.cookieService.getCookie('token'))
-            .subscribe((response) => {
-                this.cookieService.removeCookie();
-                this.notificator.showSuccess(response['message']);
-            },
+        this.userAuth.logoutUser().subscribe((response) => {
+            this.cookieService.removeCookie();
+            this.notificator.showSuccess(response['message']);
+        },
             (err) => this.notificator.showError(err.error.message),
             () => this.router.navigateByUrl('/'));
     }
