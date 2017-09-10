@@ -1,3 +1,4 @@
+import { Order } from './../../models/Order';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from './../../core/cookie/cookie.service';
 import { UsersDataService } from './../users-data/users-data.service';
@@ -9,7 +10,7 @@ import { NotificatorService } from './../../core/notificator/notificator.service
     styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-    public orders = [];
+    public orders: Order[] = [];
 
     constructor(
         private readonly userDataService: UsersDataService,
