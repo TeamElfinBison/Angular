@@ -98,7 +98,7 @@ const attachRouter = (data) => {
                         sendSuccess(
                             'Custom pizza on price: ' +
                             customPizza.price +
-                            '$ added to cart',
+                            '$ added to cart!',
                             res,
                             curr,
                         );
@@ -129,16 +129,17 @@ const attachRouter = (data) => {
                                 });
                             });
 
-                        curr.cart.customPizza = curr.cart.customPizza.filter((x) => {
-                            return x !== deletingPizza;
-                        });
+                        curr.cart.customPizza = curr.cart.customPizza
+                            .filter((x) => {
+                                return x !== deletingPizza;
+                            });
 
                         curr.cart.price -= pizza.price;
                         return data.updateUser(curr);
                     })
                     .then((curr) => {
                         sendSuccess(
-                            'Custom pizza removed from cart',
+                            'Custom pizza removed from cart!',
                             res,
                             curr,
                         );
@@ -162,7 +163,7 @@ const attachRouter = (data) => {
                         sendSuccess(
                             'Pizza "' +
                             pizza.name +
-                            '" added to cart',
+                            '" added to cart!',
                             res,
                             curr,
                         );
@@ -197,7 +198,7 @@ const attachRouter = (data) => {
                         sendSuccess(
                             'Pizza "' +
                             pizza.name +
-                            '" removed from cart',
+                            '" removed from cart!',
                             res,
                             curr,
                         );

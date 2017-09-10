@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlerterService } from './../../core/alerter/alerter.service';
 import { Cart } from './../../models/Cart';
 import { CookieService } from './../../core/cookie/cookie.service';
@@ -23,7 +24,8 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
         private readonly userDataService: UsersDataService,
         private readonly notificator: NotificatorService,
         private readonly cookieService: CookieService,
-        private readonly alerter: AlerterService
+        private readonly alerter: AlerterService,
+        private readonly router: Router
     ) { }
 
     ngOnInit() {
@@ -114,6 +116,8 @@ export class ShoppingCartComponent implements OnInit, DoCheck {
 
         this.cookieService.setCookie('cartItems', '0');
         this.cookieService.setCookie('cartPrice', '0');
+
+        this.router.navigateByUrl('/users/orders');
     }
 
     private successRemovePizza(pizza) {
