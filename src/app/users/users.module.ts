@@ -10,6 +10,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RouterModule } from '@angular/router';
 import { OrderDetailsPipe } from './order-details/order-details.pipe';
 import { DeliveryStatusPipe } from './delivery-status/delivery-status.pipe';
+import { ShowPizzaProductsPipe } from '../pizza/pizza-products/showPizzaProducts.pipe';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { DeliveryStatusPipe } from './delivery-status/delivery-status.pipe';
         OrdersComponent,
         ShoppingCartComponent,
         OrderDetailsPipe,
-        DeliveryStatusPipe
+        DeliveryStatusPipe,
+        ShowPizzaProductsPipe,
     ],
     providers: [
         UsersDataService

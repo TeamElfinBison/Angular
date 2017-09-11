@@ -7,18 +7,14 @@
     </div>
     <h1 *ngIf='cart.price <= 0'>The cart is empty!</h1>
     <div class="row">
-        <ng-container *ngFor="let customPizza of cart.customPizza; let i = index">
+        <ng-container *ngFor="let customPizza of cart.customPizza;">
             <div class="customPizza row">
                 <div class=" col-md-1 customPizza-img">
                     <img class="img-responsive" src="/assets/images/custom-pizza.png" alt="custom customPizza">
                 </div>
                 <div class="col-md-8 customPizza-description">
                     <h3>Custom Pizza</h3>
-                    <p>({{customPizza.dough[0].name}},
-                        <span *ngFor="let sauce of customPizza.sauce">{{sauce.name}}, </span>
-                        <span *ngFor="let cheese of customPizza.cheese">{{cheese.name}}, </span>
-                        <span *ngFor="let meat of customPizza.meat">{{meat.name}}, </span>
-                        <span *ngFor="let veg of customPizza.vegetables">{{veg.name}}, </span>)
+                    <p>({{customPizza | showPizzaProducts}})
                     </p>
                 </div>
                 <div class="col-xs-1 remove-btn-container relative">
@@ -31,7 +27,7 @@
             </div>
             <hr>
         </ng-container>
-        <ng-container *ngFor="let pizza of cart.pizza; let i = index">
+        <ng-container *ngFor="let pizza of cart.pizza;">
             <div class="pizza row">
                 <div class=" col-md-1 pizza-img">
                     <img class="img-responsive" src="{{pizza.imgUrl}}" alt="Pizza {{pizza.name}}">
