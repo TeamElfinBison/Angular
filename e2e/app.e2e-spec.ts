@@ -1,7 +1,7 @@
 import { element, browser, by } from 'protractor';
 import { AppPage } from './app.po';
 
-describe('find-a-room-mate App', () => {
+describe('PizzaNG App Tests', () => {
     let page: AppPage;
 
     beforeEach(() => {
