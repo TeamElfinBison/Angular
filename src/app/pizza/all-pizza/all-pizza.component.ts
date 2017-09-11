@@ -15,11 +15,7 @@ export class AllPizzaComponent implements OnInit {
     public currentPage = 1;
     public filter = 'all';
 
-    constructor(
-        private readonly pizzaDataService: PizzaDataService,
-        private readonly notificator: NotificatorService,
-        private readonly activatedRoute: ActivatedRoute
-    ) { }
+    constructor(private readonly activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.pizza = this.activatedRoute.snapshot.data['pizza']['data'][0];

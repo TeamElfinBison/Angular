@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="home-account" *ngIf="isLoggedUser == false">
-                        <a (click)=loginModal()>Log in</a>
-                        <a (click)=registerModal()>Register</a>
+                        <a class='login' (click)=loginModal()>Log in</a>
+                        <a class='register' (click)=registerModal()>Register</a>
                     </div>
                     <div class="home-account dropdown" *ngIf="isLoggedUser == true">
                         <span>Hello</span>
@@ -15,8 +15,6 @@
                             <li [routerLink]="['/users/orders']"><a> My orders</a></li>
                             <li [routerLink]="['/logout']"><a>Log out</a></li>
                         </ul>
-
-
                     </div>
                 </div>
                 <div class="col-md-6" *ngIf="isLoggedUser == true">
@@ -40,8 +38,8 @@
                     <div class="main-menu">
                         <ul>
                             <li><a [routerLink]="['/home']">Home</a></li>
-                            <li><a [routerLink]="['/pizza/all']">Classic Pizza</a></li>
-                            <li><a [routerLink]="['/pizza/custompizza']">Build your own pizza!</a></li>
+                            <li><a [routerLink]="['/pizza/all']" class='pizza'>Classic Pizza</a></li>
+                            <li><a [routerLink]="['/pizza/custompizza']" class='custompizza'>Build your own pizza!</a></li>
                         </ul>
                     </div>
                 </div>
