@@ -1,3 +1,4 @@
+import { AlerterService } from './../../core/alerter/alerter.service';
 import { Subscription } from 'rxjs/Subscription';
 import { CookieService } from './../../core/cookie/cookie.service';
 import { PizzaDataService } from './../pizza-data/pizza-data.service';
@@ -22,6 +23,7 @@ export class CustompizzaComponent implements OnInit, OnDestroy {
     public selectedPizza: CustomPizza = new CustomPizza();
 
     constructor(
+        private readonly alerter: AlerterService,
         private readonly userInfo: UserInfoService,
         private readonly cookieService: CookieService,
         private readonly dialogService: DialogService,
@@ -104,7 +106,7 @@ export class CustompizzaComponent implements OnInit, OnDestroy {
                 this.cookieService.setCookie('cartItems', (items + 1).toString());
                 this.cookieService.setCookie('cartPrice', (price + this.selectedPizza.price).toString());
 
-                this.notificator.showSuccess(response['message']);
+                this.alerter.showSuccessAlert('Added!', response['message']);
                 this.selectedPizza = new CustomPizza();
             },
             (err) => this.notificator.showError(err.error.message));
