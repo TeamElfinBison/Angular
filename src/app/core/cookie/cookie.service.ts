@@ -10,14 +10,14 @@ export class CookieService {
     }
 
     setCookie(name: string, value: string) {
-        return this.cookieService.set(name, value);
+        return this.cookieService.set(name, value, undefined, '/');
     }
 
     removeCookie(name?: string) {
         if (name) {
-            return this.cookieService.delete(name);
+            return this.cookieService.delete(name, '/');
         }
 
-        return this.cookieService.deleteAll();
+        return this.cookieService.deleteAll('/');
     }
 }
