@@ -16,7 +16,7 @@ const attachRouter = (data) => {
                 .catch((error) => sendError(error, res));
         })
         .post('/logout',
-            // passport.authenticate('jwt', { session: false }),
+            passport.authenticate('jwt', { session: false }),
             (req, res) => {
                 sendSuccess('Logout success!', res);
             })
@@ -76,8 +76,7 @@ const attachRouter = (data) => {
                         sendSuccess(
                             'The order is coming in your way!',
                             res,
-                            order,
-                        );
+                            order);
                     })
                     .catch((error) => sendError(error, res));
             })
@@ -100,8 +99,7 @@ const attachRouter = (data) => {
                             customPizza.price +
                             '$ added to cart!',
                             res,
-                            curr,
-                        );
+                            curr);
                     })
                     .catch((error) => sendError(error, res));
             })
@@ -141,8 +139,7 @@ const attachRouter = (data) => {
                         sendSuccess(
                             'Custom pizza removed from cart!',
                             res,
-                            curr,
-                        );
+                            curr);
                     })
                     .catch((error) => sendError(error, res));
             })
@@ -165,8 +162,7 @@ const attachRouter = (data) => {
                             pizza.name +
                             '" added to cart!',
                             res,
-                            curr,
-                        );
+                            curr);
                     })
                     .catch((error) => sendError(error, res));
             })
@@ -200,8 +196,7 @@ const attachRouter = (data) => {
                             pizza.name +
                             '" removed from cart!',
                             res,
-                            curr,
-                        );
+                            curr);
                     })
                     .catch((error) => sendError(error, res));
             }
