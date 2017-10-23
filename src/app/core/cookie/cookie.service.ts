@@ -10,7 +10,7 @@ export class CookieService {
     }
 
     setCookie(name: string, value: string) {
-        return this.cookieService.set(name, value, undefined, '/');
+        return this.cookieService.set(name, value, 1, '/');
     }
 
     removeCookie(name?: string) {
