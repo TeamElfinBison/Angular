@@ -32,6 +32,7 @@ const configApp = (app, data) => {
     const options = {};
     options.jwtFromRequest = ExtractJwt.fromHeader('token');
     options.secretOrKey = config.APP_SECRET;
+    options.ignoreExpiration = true;
 
     passport.use(new JwtStrategy(options, (jwtPayload, done) => {
         data
